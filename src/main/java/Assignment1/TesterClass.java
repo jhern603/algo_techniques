@@ -20,18 +20,21 @@ public class TesterClass {
         SearchAlgorithms search = new SearchAlgorithms();
         ArrayUtilities util = new ArrayUtilities();
 
-        int sizeOfInput = 150000;
-        for (int i = 0; i <= sizeOfInput; i+=10) {
-            int[] nums = new int[i];
-            util.fillArray(nums, sizeOfInput);
-            int searchFor = new Random().nextInt(sizeOfInput);
+//        int sizeOfInput = 100000;
+        for (int i = 0; i <= 10000; i++) {
+            int[] nums = new int[i+10];
+            util.fillArray(nums, 20);
+            int searchFor = new Random().nextInt(20);
 
+            // O(n)
             search.sequentialSearch(searchFor, nums.length, nums);
             int sequentialComparisons = search.getComparisonCount();
 
+            //O(M+log(n))
             search.boundarySearch(nums, searchFor, nums.length);
             int boundaryComparisons = search.getComparisonCount();
 
+            //O(log(n))
             search.modifiedSearch(nums, searchFor, nums.length);
             int modifiedComparisons = search.getComparisonCount();
 
