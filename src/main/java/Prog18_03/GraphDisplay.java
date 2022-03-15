@@ -15,34 +15,52 @@ public class GraphDisplay extends JPanel {
      * @param g graphics context
      */
     public void paint(Graphics g) {
+        //Dimensions for boundary box of circle
         int leftX = 100;
         int topY = 100;
-        int width = 50;
-        int height = 50;
+        //radius of circle
+        int radius = 50;
+        //coordinate for circle content
         int labelX = 17;
         int labelY = 31;
+        //How much to space each circle apart
         int gridWidth = 150;
 
-        //1->2
-        drawEdge(
-                g,
-                leftX + width,
-                topY + height / 2,
-                leftX + gridWidth,
-                topY + height / 2);
-        //1->4
-        drawEdge(
-                g,
-                leftX + width / 2,
-                topY + height,
-                leftX + gridWidth,
-                topY + height / 2 + gridWidth);
+
         int numRows = 0;
-        int numColumns = 0;
-        for (int i = 0; i < 20; i++) {
-            numRows += i % 5 == 0 ? 1 : 0;
+        int numColumns;
+        int numElements=20;
+
+        for (int i = 0; i < numElements; i++) {
+
+            if (i % 5 == 0)
+                if (i == 0) {
+                    numRows = 0;
+                } else {
+                    numRows += 1;
+                }
+
             numColumns = i % 5 == 0 ? 0 : i % 5;
-            drawVertex(g, leftX + (gridWidth * numColumns), topY + (gridWidth * numRows), width, height, labelX, labelY, i + 1);
+            int x = 0;
+            int y;
+
+            for (int j = 0; j < numElements; j++) {
+                if (j % 4 == 0)
+                    if (j == 0) {
+                        x = 0;
+                    } else {
+                        x += 1;
+                    }
+                y = j % 4;
+                drawEdge(
+                        g,
+                        leftX + radius / 2 + (gridWidth * x),
+                        topY + radius / 2 + (gridWidth * y),
+                        leftX + radius / 2 + (gridWidth * numColumns),
+                        topY + radius / 2 + (gridWidth * numRows));
+
+            }
+            drawVertex(g, leftX + (gridWidth * numColumns), topY + (gridWidth * numRows), radius, radius, labelX, labelY, i + 1);
         }
 
 
