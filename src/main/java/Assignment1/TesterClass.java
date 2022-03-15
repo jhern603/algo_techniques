@@ -9,7 +9,7 @@ public class TesterClass {
 
     public static void main(String[] args) {
 
-        String outputFile = "output.csv";
+        String outputFile = "output-large-block.csv";
         PrintWriter output = null;
         try {
             output = new PrintWriter(new FileWriter(outputFile));
@@ -20,22 +20,21 @@ public class TesterClass {
         SearchAlgorithms search = new SearchAlgorithms();
         ArrayUtilities util = new ArrayUtilities();
 
-//        int sizeOfInput = 100000;
         for (int i = 0; i <= 10000; i++) {
             int[] nums = new int[i+10];
             util.fillArray(nums, 20);
             int searchFor = new Random().nextInt(20);
 
             // O(n)
-            search.sequentialSearch(searchFor, nums.length, nums);
+            System.out.println(search.sequentialSearch(searchFor, nums.length, nums));
             int sequentialComparisons = search.getComparisonCount();
 
-            //O(M+log(n))
-            search.boundarySearch(nums, searchFor, nums.length);
+            // O(M+log(n))
+            System.out.println(search.boundarySearch(nums, searchFor, nums.length));
             int boundaryComparisons = search.getComparisonCount();
 
-            //O(log(n))
-            search.modifiedSearch(nums, searchFor, nums.length);
+            // O(log(n))
+            System.out.println(search.modifiedSearch(nums, searchFor, nums.length));
             int modifiedComparisons = search.getComparisonCount();
 
             output.println(

@@ -30,7 +30,6 @@ public class SearchAlgorithms {
         boolean found = false;
         for (int i = 0; i < len - 1; i++) {
             this.comparisonCount++;
-            System.out.println("sequential searching");
             if (arr[i] == n) {
                 found = true;
                 sizeOfBlock++;
@@ -57,14 +56,12 @@ public class SearchAlgorithms {
         int midpoint = binarySearch(list, 0, len - 1, x);
         if (midpoint == 0) return 0;
         for (int i = midpoint; i > 0; i--) {
-            System.out.println("modified left searching");
             if (list[i - 1] == x) {
                 this.comparisonCount++;
                 xCount++;
             }
         }
         for (int i = midpoint + 1; i < len; i++) {
-            System.out.println("modified right searching");
             if (list[i] == x) {
                 this.comparisonCount++;
                 xCount++;
@@ -84,7 +81,6 @@ public class SearchAlgorithms {
      */
     private int binarySearch(int[] list, int first, int last, int x) {
         int position;
-        System.out.println("binary searching");
         comparisonCount++;
         if (first > last) {
             position = 0;
@@ -133,7 +129,6 @@ public class SearchAlgorithms {
      */
     private int locateLeftEnd(int[] list, int first, int last, int x) {
         int loc;
-        System.out.println("left searching");
         this.comparisonCount++;
         if (first > last) loc = first;
         else {
@@ -158,7 +153,6 @@ public class SearchAlgorithms {
     private int locateRightEnd(int[] list, int first, int last, int x) {
         int loc;
         this.comparisonCount++;
-        System.out.println("right searching");
         if (first > last) loc = first;
         else {
             int mid = (first + last) / 2;
