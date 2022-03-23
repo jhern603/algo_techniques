@@ -11,6 +11,7 @@ import java.util.Scanner;
  * @author Prof. Antonio Hernandez
  */
 public class Graph implements Prog18_01.GraphInterface {
+
     private int verticesNumber;
     private int[][] matrix; // adjacency matrix
 
@@ -52,6 +53,10 @@ public class Graph implements Prog18_01.GraphInterface {
         }
 
         in.close();
+    }
+
+    public int getVerticesNumber() {
+        return verticesNumber;
     }
 
     public void addEdge(int v, int w) {

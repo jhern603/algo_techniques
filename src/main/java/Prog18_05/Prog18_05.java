@@ -2,6 +2,7 @@ package Prog18_05;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Prog18_05 {
