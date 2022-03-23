@@ -15,46 +15,70 @@ public class GraphDisplay extends JPanel {
      * @param g graphics context
      */
     public void paint(Graphics g) {
+        //Dimensions for boundary box of circle
         int leftX = 100;
         int topY = 100;
-        int width = 50;
-        int height = 50;
+        //radius of circle
+        int radius = 50;
+        //coordinate for circle content
         int labelX = 17;
         int labelY = 31;
+        //How much to space each circle apart
         int gridWidth = 150;
 
-        drawEdge(
-            g,
-            leftX + width,
-            topY + height / 2,
-            leftX + gridWidth,
-            topY + height / 2);
-        drawEdge(
-                g,
-                leftX + width / 2,
-                topY + height,
-                leftX + gridWidth,
-                topY + height / 2 + gridWidth);
 
-        // draw vertex 1
-        drawVertex( g, leftX, topY, width, height, labelX, labelY, "1" );
-        drawVertex( g, leftX + gridWidth, topY, width, height, labelX, labelY, "2" );
-        drawVertex( g, leftX + gridWidth, topY + gridWidth, width, height, labelX, labelY, "3" );
+        int numRows = 0;
+        int numColumns;
+        int numElements=20;
+
+        for (int i = 0; i < numElements; i++) {
+
+            if (i % 5 == 0)
+                if (i == 0) {
+                    numRows = 0;
+                } else {
+                    numRows += 1;
+                }
+
+            numColumns = i % 5 == 0 ? 0 : i % 5;
+            int x = 0;
+            int y;
+
+            for (int j = 0; j < numElements; j++) {
+                if (j % 4 == 0)
+                    if (j == 0) {
+                        x = 0;
+                    } else {
+                        x += 1;
+                    }
+                y = j % 4;
+                drawEdge(
+                        g,
+                        leftX + radius / 2 + (gridWidth * x),
+                        topY + radius / 2 + (gridWidth * y),
+                        leftX + radius / 2 + (gridWidth * numColumns),
+                        topY + radius / 2 + (gridWidth * numRows));
+
+            }
+            drawVertex(g, leftX + (gridWidth * numColumns), topY + (gridWidth * numRows), radius, radius, labelX, labelY, i + 1);
+        }
 
 
     }
 
-private void drawVertex( java.awt.Graphics g, int leftX, int topY, int width, int height, int labelX, int labelY,
-                         String content ){
-    g.setColor( java.awt.Color.ORANGE);
-    g.fillOval( leftX, topY, width, height );
-    g.setColor( java.awt.Color.BLACK);
-    g.drawOval( leftX, topY, width, height );
-    g.setFont(new java.awt.Font( java.awt.Font.SANS_SERIF, java.awt.Font.BOLD, 24));
-    g.drawString(content, leftX + labelX, topY + labelY );
-}
+    private void drawVertex(java.awt.Graphics g, int leftX, int topY, int width, int height, int labelX, int labelY,
+                            int num) {
 
-private void drawEdge(java.awt.Graphics g, int x1, int y1, int x2, int y2) {
+        String content = String.valueOf(num);
+        g.setColor(java.awt.Color.ORANGE);
+        g.fillOval(leftX, topY, width, height);
+        g.setColor(java.awt.Color.BLACK);
+        g.drawOval(leftX, topY, width, height);
+        g.setFont(new java.awt.Font(java.awt.Font.SANS_SERIF, java.awt.Font.BOLD, 24));
+        g.drawString(content, leftX + labelX, topY + labelY);
+    }
+
+    private void drawEdge(java.awt.Graphics g, int x1, int y1, int x2, int y2) {
         g.setColor(java.awt.Color.BLACK);
         g.drawLine(x1, y1, x2, y2);
     }
