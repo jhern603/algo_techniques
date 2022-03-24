@@ -1,16 +1,14 @@
-package Prog18_03;
-
-import javax.swing.*;
+package Assignment2;
 
 /**
  * Defines a frame a panel with the drawings will be added to.
  * 
  * @author Prof. Antonio Hernandez
  */
-public class FrameDisplay extends JFrame
+public class FrameDisplay extends javax.swing.JFrame
 {
-    int WIDTH = 1080;
-    int HEIGHT = 1080;
+    int WIDTH = 450;
+    int HEIGHT = 450;
 
     public FrameDisplay()
     {
