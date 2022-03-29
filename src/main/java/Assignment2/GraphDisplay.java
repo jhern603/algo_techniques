@@ -27,16 +27,13 @@ public class GraphDisplay extends javax.swing.JPanel {
         int gridWidth = 150;
 
         int numRows = 0;
-
-        int numElements = 25;
+        int numElements = 20;
         int numColumns;
         int graphSize = (int) Math.ceil(Math.sqrt(numElements));
-        int[][] coords = new int[numElements][2];
+        System.out.println(graphSize);
         for (int i = 0; i < numElements; i++) {
             numColumns = i % graphSize;
-            coords[i][0] = leftX + (gridWidth * numColumns);
-            coords[i][1] = topY + (gridWidth * numRows);
-            if (i % graphSize == 0) if (i != 0) numRows += 1;
+            if (i % graphSize == 0)  numRows += 1;
             drawVertex(
                     g,
                     leftX + (gridWidth * numColumns),
@@ -48,17 +45,26 @@ public class GraphDisplay extends javax.swing.JPanel {
                     i + 1);
         }
 
-        for (int i = 0; i < graphSize; i++){
-            for (int j = 0; j < graphSize; j++) {
+        int numColumnsTo = 0;
+        int numRowsTo = 0;
+        for (int i = 0; i < numElements; i++) {
+            numColumns = i % graphSize;
+            if (i % graphSize == 0)  numRows += 1;
+
+            for (int j = 0; j < numElements; j++) {
+                numColumnsTo = i % graphSize;
+                if (i % graphSize == 0)  numRowsTo += 1;
                 drawEdge(
                     g,
-                    coords[i][0],
-                    coords[i][1],
-                    center + (gridWidth * i),
-                    center + (gridWidth * j)
-                    );
+                    leftX + (gridWidth * numColumns),
+                    topY + (gridWidth * numRows),
+                    leftX + (gridWidth * numColumnsTo),
+                    topY + (gridWidth * numRowsTo)
+                );
             }
         }
+
+
     }
 
     private void drawVertex(
