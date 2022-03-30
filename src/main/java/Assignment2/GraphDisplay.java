@@ -30,33 +30,32 @@ public class GraphDisplay extends javax.swing.JPanel {
 
         //Next, print the weighted graph
 
-        for (int i = 1; i < graphSize; i++) {
-            for (int j = 1; j < graphSize; j++) {
-                int xFrom = coords[i - 1][0] + radius / 2;
-                int yFrom = coords[i - 1][1] + radius / 2;
-                int xTo = coords[j][0] + radius / 2;
-                int yTo = coords[j][1] + radius / 2;
-                String weight = String.valueOf(input.getMatrix()[(i - 1) % graphSize][(j - 1) % graphSize]);
-                if (Integer.parseInt(weight) != 0)
-                    drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, weight);
-                drawEdge(g, xFrom, yFrom, xTo, yTo);
-            }
-        }
+        drawCompleteGraph( g, radius, labelX, labelY, coords, graphSize );
+    }
 
-        for (int i = 0; i < graphSize; i++) {
-            drawVertex(
-                    g,
-                    coords[i][0],
-                    coords[i][1],
-                    radius,
-                    radius,
-                    labelX,
-                    labelY,
-                    i + 1);
+private void drawCompleteGraph( java.awt.Graphics g, int radius, int labelX, int labelY, int[][] coords, int graphSize ){
+    for ( int i = 1; i < graphSize; i++) {
+        for ( int j = 1; j < graphSize; j++) {
+            int xFrom = coords[i - 1][0] + radius / 2;
+            int yFrom = coords[i - 1][1] + radius / 2;
+            int xTo = coords[j][0] + radius / 2;
+            int yTo = coords[j][1] + radius / 2;
+            String weight = String.valueOf(input.getMatrix()[(i - 1) % graphSize ][(j - 1) % graphSize ]);
+            if ( Integer.parseInt(weight) != 0)
+                drawWeight( g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, weight);
+            drawEdge( g, xFrom, yFrom, xTo, yTo);
         }
     }
 
-    private int getNumElements() {
+    for ( int i = 0; i < graphSize; i++) {
+        drawVertex( g,
+                coords[i][0],
+                coords[i][1], radius, radius, labelX, labelY,
+                i + 1);
+    }
+}
+
+private int getNumElements() {
         int numElements = 0;
         for (int i = 0; i < input.getVerticesNumber(); i++) {
             for (int j = 0; j < input.getVerticesNumber(); j++) {
@@ -77,7 +76,7 @@ public class GraphDisplay extends javax.swing.JPanel {
             //x
             coords[i][0] = r.nextInt(numElements * graphSize) + (gridWidth * x++);
             //y
-            coords[i][1] = r.nextInt(numElements * graphSize * 10) + (gridWidth * y);
+            coords[i][1] = r.nextInt(numElements * graphSize * 5) + (gridWidth * y);
         }
     }
 
