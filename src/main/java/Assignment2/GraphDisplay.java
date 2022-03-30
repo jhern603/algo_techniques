@@ -38,17 +38,17 @@ public class GraphDisplay extends javax.swing.JPanel {
             drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, i, java.awt.Color.ORANGE);
         }
 
-        for (int i = 1; i < graphSize; i++) {
-            for (int j = 1; j < graphSize; j++) {
-                int xFrom = coords[i - 1][0] + radius / 2;
-                int yFrom = coords[i - 1][1] + radius / 2;
-                int xTo = coords[j][0] + radius / 2;
-                int yTo = coords[j][1] + radius / 2;
-                if (input.getMatrix()[(i - 1) % graphSize][(j - 1) % graphSize] != 0)
-                    drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2,
-                        String.valueOf(input.getMatrix()[i][j]));
-            }
-        }
+//        for (int i = 1; i < graphSize; i++) {
+//            for (int j = 1; j < graphSize; j++) {
+//                int xFrom = coords[i - 1][0] + radius / 2;
+//                int yFrom = coords[i - 1][1] + radius / 2;
+//                int xTo = coords[j][0] + radius / 2;
+//                int yTo = coords[j][1] + radius / 2;
+//                if (input.getMatrix()[(i - 1) % graphSize][(j - 1) % graphSize] != 0)
+//                    drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2,
+//                        String.valueOf(input.getMatrix()[i][j]));
+//            }
+//        }
 
 
         drawDijkstraGraph( g, input, radius, labelX, labelY, coords );
