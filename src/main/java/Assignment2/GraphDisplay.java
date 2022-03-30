@@ -39,23 +39,25 @@ public class GraphDisplay extends javax.swing.JPanel {
             int labelY,
             int[][] coords,
             int graphSize) {
+        boolean[][] drawn = new boolean[graphSize][graphSize];
         for (int i = 1; i < graphSize; i++) {
             for (int j = 1; j < graphSize; j++) {
                 int xFrom = coords[i - 1][0] + radius / 2;
                 int yFrom = coords[i - 1][1] + radius / 2;
                 int xTo = coords[j][0] + radius / 2;
                 int yTo = coords[j][1] + radius / 2;
-                String weight =
-                        String.valueOf(input.getMatrix()[(i - 1) % graphSize][(j - 1) % graphSize]);
-                if (Integer.parseInt(weight) != 0)
-                    // Weight is not being correctly placed for each vertex
+                String weight = String.valueOf(input.getMatrix()[i - 1][j - 1]);
+                if (Integer.parseInt(weight) != 0 && (!drawn[i - 1][j - 1] && !drawn[j - 1][i - 1]) ) {
+                    drawn[i - 1][j - 1] = true;
+                    drawn[j - 1][i - 1] = true;
                     drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, weight);
-                drawEdge(g, xFrom, yFrom, xTo, yTo);
+                    drawEdge(g, xFrom, yFrom, xTo, yTo);
+                }
             }
         }
 
         for (int i = 0; i < graphSize; i++) {
-            drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, i + 1);
+            drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, i);
         }
     }
 
