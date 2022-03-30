@@ -58,29 +58,16 @@ public class Graph {
         in.close();
     }
 
-    public Graph(int[] d, int len) {
-
-            matrix = new int[len][0];
-                for (int i = 0; i < len; i++) {
-                    for (int j = 0; j < verticesNumber; j++) {
-                        matrix[i][j] = d[i];
-                    }
-                }
-
-
-
-    }
-
 
     public int getVerticesNumber() {
         return verticesNumber;
     }
 
     public int[] getBounds() {
-        return new int[] {s, t};
+        return new int[]{s, t};
     }
 
-    public int[][] getMatrix(){
+    public int[][] getMatrix() {
         return matrix;
     }
 
@@ -89,7 +76,7 @@ public class Graph {
      *
      * @param v given vertex
      * @return list of vertices adjacent to v stored in an array; size of array = number of adjacent
-     *     vertices
+     * vertices
      */
     public int[] findAdjacencyVertices(int v) {
         int[] vert = new int[verticesNumber];
@@ -105,8 +92,7 @@ public class Graph {
         return Arrays.copyOf(vert, total);
     }
 
-    int minDistance(int dist[], Boolean sptSet[], int target)
-    {
+    int minDistance(int dist[], boolean sptSet[], int target) {
         int min = Integer.MAX_VALUE, min_index = -1;
         for (int v = 0; v < target; v++)
             if (sptSet[v] == false && dist[v] <= min) {
@@ -117,30 +103,36 @@ public class Graph {
         return min_index;
     }
 
-    int[] dijkstra(int src, int target)
-    {
-        int dist[] = new int[target+1];
-        Boolean visited[] = new Boolean[target+1];
+    int[] dijkstra(int src, int target) {
+        boolean[] spt = new boolean[target];
+        int[] distance = new int[target];
+        int INFINITY = Integer.MAX_VALUE;
 
         for (int i = 0; i < target; i++) {
-            dist[i] = Integer.MAX_VALUE;
-            visited[i] = false;
+            distance[i] = INFINITY;
         }
-        dist[src] = 0;
+        distance[src] = 0;
 
-        for (int count = 0; count < target; count++) {
-            int u = minDistance(dist, visited, target);
-            visited[u] = true;
+        for (int i = 0; i < target; i++) {
+            int vertex_U = minDistance(distance, spt, target);
+            spt[vertex_U] = true;
 
-            for (int v = 0; v < target; v++) {
-                boolean vertexExists = matrix[u][v] != 0;
-                if (!visited[v] && vertexExists && dist[u] != Integer.MAX_VALUE && dist[u] + matrix[u][v] < dist[v])
-                    dist[v] = dist[u] + matrix[u][v];
+            for (int vertex_V = 0; vertex_V < target; vertex_V++) {
+                if (matrix[vertex_U][vertex_V] > 0) {
+
+                    if (spt[vertex_V] == false && matrix[vertex_U][vertex_V] != INFINITY) {
+                        int newKey = matrix[vertex_U][vertex_V] + distance[vertex_U];
+                        if (newKey < distance[vertex_V])
+                            distance[vertex_V] = newKey;
+                    }
+                }
             }
         }
 
-        return dist;
+
+        return Arrays.copyOf(distance, target);
     }
+
     public String toString() {
         String s = "";
 
