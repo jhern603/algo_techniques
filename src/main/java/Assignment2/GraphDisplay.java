@@ -20,30 +20,13 @@ public class GraphDisplay extends javax.swing.JPanel {
         int labelY = 31;
         // How much to space each circle apart
         int gridWidth = 150;
-        int numElements = 0;
-        for (int i = 0; i < input.getVerticesNumber(); i++) {
-            for (int j = 0; j < input.getVerticesNumber(); j++) {
-                if (input.getMatrix()[i][j] != 0) numElements++;
-            }
-        }
-
+        int numElements = getNumElements();
 
         int y = 0;
         int x = 0;
         int[][] coords = new int[numElements][2];
         int graphSize = (int) Math.ceil(Math.sqrt(numElements));
-        Random r = new Random();
-
-        for (int i = 0; i < numElements; i++) {
-            if (x == graphSize) {
-                x = 0;
-                y++;
-            }
-            //x
-            coords[i][0] = r.nextInt(numElements * graphSize) + (gridWidth * x++);
-            //y
-            coords[i][1] = r.nextInt(numElements * graphSize) + (gridWidth * y);
-        }
+        setCoordinates(gridWidth, numElements, y, x, coords, graphSize);
 
         //Next, print the weighted graph
         for (int i = 1; i < numElements; i++) {
@@ -52,8 +35,9 @@ public class GraphDisplay extends javax.swing.JPanel {
                 int yFrom = coords[i - 1][1] + radius / 2;
                 int xTo = coords[j][0] + radius / 2;
                 int yTo = coords[j][1] + radius / 2;
+                String weight = String.valueOf(input.getMatrix()[(i - 1) % graphSize][(j - 1) % graphSize]);
                 if (input.getMatrix()[(i - 1) % graphSize][(j - 1) % graphSize] != 0)
-                    drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, String.valueOf(input.getMatrix()[(i - 1) % graphSize][(j - 1) % graphSize]));
+                    drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, weight);
                 drawEdge(g, xFrom, yFrom, xTo, yTo);
             }
         }
@@ -71,6 +55,31 @@ public class GraphDisplay extends javax.swing.JPanel {
         }
     }
 
+    private int getNumElements() {
+        int numElements = 0;
+        for (int i = 0; i < input.getVerticesNumber(); i++) {
+            for (int j = 0; j < input.getVerticesNumber(); j++) {
+                if (input.getMatrix()[i][j] != 0) numElements++;
+            }
+        }
+        return numElements;
+    }
+
+    private void setCoordinates(int gridWidth, int numElements, int y, int x, int[][] coords, int graphSize) {
+        Random r = new Random();
+
+        for (int i = 0; i < numElements; i++) {
+            if (x == graphSize) {
+                x = 0;
+                y++;
+            }
+            //x
+            coords[i][0] = r.nextInt(numElements * graphSize) + (gridWidth * x++);
+            //y
+            coords[i][1] = r.nextInt(numElements * graphSize) + (gridWidth * y);
+        }
+    }
+
     private void drawVertex(
             Graphics g,
             int leftX,
@@ -80,14 +89,11 @@ public class GraphDisplay extends javax.swing.JPanel {
             int labelX,
             int labelY,
             int i) {
-
-
         g.setColor(Color.ORANGE);
         g.fillOval(leftX, topY, width, height);
         g.setColor(Color.BLACK);
         g.drawOval(leftX, topY, width, height);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
-
         g.drawString(String.valueOf(i), leftX + labelX, topY + labelY);
     }
 
