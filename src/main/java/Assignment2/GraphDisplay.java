@@ -74,9 +74,9 @@ public class GraphDisplay extends javax.swing.JPanel {
                 y++;
             }
             //x
-            coords[i][0] = r.nextInt(numElements * graphSize) + (gridWidth * x++);
+            coords[i][0] = (gridWidth * x++) + r.nextInt(numElements * 4 * graphSize);
             //y
-            coords[i][1] = r.nextInt(numElements * graphSize) + (gridWidth * y);
+            coords[i][1] = (gridWidth * y) + r.nextInt(numElements * 4 * graphSize);
         }
     }
 
@@ -89,10 +89,10 @@ public class GraphDisplay extends javax.swing.JPanel {
             int labelX,
             int labelY,
             int i) {
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.MAGENTA);
         g.fillOval(leftX, topY, width, height);
         g.setColor(Color.BLACK);
-        g.drawOval(leftX, topY, width, height);
+//        g.drawOval(leftX, topY, width, height);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         g.drawString(String.valueOf(i), leftX + labelX, topY + labelY);
     }
