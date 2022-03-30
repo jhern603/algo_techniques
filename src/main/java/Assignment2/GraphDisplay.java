@@ -10,16 +10,18 @@ import java.util.Random;
 public class GraphDisplay extends javax.swing.JPanel {
 
 
-
+//EXPLORE: print the whole graph WITH THE WEIGHTS, then just reprint the lines in a different color to depict shortest path
     public void paint(Graphics g) {
         Graph input = new Graph("src/main/java/Assignment2/5by5Graph.txt");
+        int target = 5;
         int src = 0;
-        int[] shortestPath = input.dijkstra(src, 5);
-        System.out.printf("Shortest path between %d and %d is : ", src, 3);
+        int[] shortestPath = input.dijkstra(src, target);
+        System.out.printf("Shortest path between %d and %d is : ", src, target);
         for (int i = 0; i < shortestPath.length; i++) {
             System.out.print(i + ", ");
         }
         System.out.println();
+        System.out.println("Distance between each vertex");
         System.out.println(Arrays.toString(shortestPath));
         int numElements = shortestPath.length;
         // Dimensions for boundary box of circle
@@ -40,16 +42,15 @@ public class GraphDisplay extends javax.swing.JPanel {
         setCoordinates(gridWidth, numElements, y, x, coords, graphSize);
 
         //Next, print the weighted graph
-        for (int i = src + 1; i < numElements; i++) {
+        for (int i = src + 1, j =0; i < numElements; i++) {
                 int xFrom = coords[i - 1][0] + radius / 2;
                 int yFrom = coords[i - 1][1] + radius / 2;
                 int xTo = coords[i][0] + radius / 2;
                 int yTo = coords[i][1] + radius / 2;
-                drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, String.valueOf(shortestPath[i]));
+//                drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, String.valueOf(input.getWeights()[i]));
+
                 drawEdge(g, xFrom, yFrom, xTo, yTo);
         }
-
-
 
         for (int i = src; i < numElements; i++) {
             drawVertex(
@@ -60,7 +61,7 @@ public class GraphDisplay extends javax.swing.JPanel {
                     radius,
                     labelX,
                     labelY,
-                    i);
+                    i) ;
         }
     }
 
