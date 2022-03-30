@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.util.Random;
 
-
 public class GraphDisplay extends javax.swing.JPanel {
     public Graph input = new Graph("src/main/java/Assignment2/5by5Graph.txt");
 
@@ -28,34 +27,39 @@ public class GraphDisplay extends javax.swing.JPanel {
         int graphSize = (int) Math.ceil(Math.sqrt(numElements)) + 1;
         setCoordinates(gridWidth, numElements, y, x, coords, graphSize);
 
-        //Next, print the weighted graph
+        // Next, print the weighted graph
 
-        drawCompleteGraph( g, radius, labelX, labelY, coords, graphSize );
+        drawCompleteGraph(g, radius, labelX, labelY, coords, graphSize);
     }
 
-private void drawCompleteGraph( java.awt.Graphics g, int radius, int labelX, int labelY, int[][] coords, int graphSize ){
-    for ( int i = 1; i < graphSize; i++) {
-        for ( int j = 1; j < graphSize; j++) {
-            int xFrom = coords[i - 1][0] + radius / 2;
-            int yFrom = coords[i - 1][1] + radius / 2;
-            int xTo = coords[j][0] + radius / 2;
-            int yTo = coords[j][1] + radius / 2;
-            String weight = String.valueOf(input.getMatrix()[(i - 1) % graphSize ][(j - 1) % graphSize ]);
-            if ( Integer.parseInt(weight) != 0)
-                drawWeight( g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, weight);
-            drawEdge( g, xFrom, yFrom, xTo, yTo);
+    private void drawCompleteGraph(
+            java.awt.Graphics g,
+            int radius,
+            int labelX,
+            int labelY,
+            int[][] coords,
+            int graphSize) {
+        for (int i = 1; i < graphSize; i++) {
+            for (int j = 1; j < graphSize; j++) {
+                int xFrom = coords[i - 1][0] + radius / 2;
+                int yFrom = coords[i - 1][1] + radius / 2;
+                int xTo = coords[j][0] + radius / 2;
+                int yTo = coords[j][1] + radius / 2;
+                String weight =
+                        String.valueOf(input.getMatrix()[(i - 1) % graphSize][(j - 1) % graphSize]);
+                if (Integer.parseInt(weight) != 0)
+                    // Weight is not being correctly placed for each vertex
+                    drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, weight);
+                drawEdge(g, xFrom, yFrom, xTo, yTo);
+            }
+        }
+
+        for (int i = 0; i < graphSize; i++) {
+            drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, i + 1);
         }
     }
 
-    for ( int i = 0; i < graphSize; i++) {
-        drawVertex( g,
-                coords[i][0],
-                coords[i][1], radius, radius, labelX, labelY,
-                i + 1);
-    }
-}
-
-private int getNumElements() {
+    private int getNumElements() {
         int numElements = 0;
         for (int i = 0; i < input.getVerticesNumber(); i++) {
             for (int j = 0; j < input.getVerticesNumber(); j++) {
@@ -65,7 +69,8 @@ private int getNumElements() {
         return numElements;
     }
 
-    private void setCoordinates(int gridWidth, int numElements, int y, int x, int[][] coords, int graphSize) {
+    private void setCoordinates(
+            int gridWidth, int numElements, int y, int x, int[][] coords, int graphSize) {
         Random r = new Random();
 
         for (int i = 0; i < numElements; i++) {
@@ -73,22 +78,15 @@ private int getNumElements() {
                 x = 0;
                 y++;
             }
-            //x
+            // x
             coords[i][0] = r.nextInt(numElements * graphSize) + (gridWidth * x++);
-            //y
+            // y
             coords[i][1] = r.nextInt(numElements * graphSize * 5) + (gridWidth * y);
         }
     }
 
     private void drawVertex(
-            Graphics g,
-            int leftX,
-            int topY,
-            int width,
-            int height,
-            int labelX,
-            int labelY,
-            int i) {
+            Graphics g, int leftX, int topY, int width, int height, int labelX, int labelY, int i) {
         g.setColor(Color.ORANGE);
         g.fillOval(leftX, topY, width, height);
         g.setColor(Color.BLACK);
