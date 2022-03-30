@@ -1,70 +1,82 @@
 package Assignment2;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.util.Arrays;
+import java.util.Random;
 
-/**
- * Defines a panel the drawings will be made in.
- *
- * @author Prof. Antonio Hernandez
- */
+
 public class GraphDisplay extends javax.swing.JPanel {
-    /**
-     * Paints the graph example.
-     *
-     * @param g graphics context
-     */
+
+
+
     public void paint(Graphics g) {
+        Graph input = new Graph("src/main/java/Assignment2/5by5Graph.txt");
+        int src = 0;
+        int[] shortestPath = input.dijkstra(src, 5);
+        System.out.printf("Shortest path between %d and %d is : ", src, 3);
+        for (int i = 0; i < shortestPath.length; i++) {
+            System.out.print(i + ", ");
+        }
+        System.out.println();
+        System.out.println(Arrays.toString(shortestPath));
+        int numElements = shortestPath.length;
         // Dimensions for boundary box of circle
-        int leftX = 100;
-        int topY = 100;
+        int diameter = 100;
         // radius of circle
-        int radius = 50;
+        int radius = diameter / 2;
         // coordinate for circle content
-        int center = leftX + radius / 2;
         int labelX = 17;
         int labelY = 31;
         // How much to space each circle apart
         int gridWidth = 150;
 
-        int numRows = 0;
-        int numElements = 20;
-        int numColumns;
+
+        int y = 0;
+        int x = 0;
+        int[][] coords = new int[numElements][2];
         int graphSize = (int) Math.ceil(Math.sqrt(numElements));
-        System.out.println(graphSize);
-        for (int i = 0; i < numElements; i++) {
-            numColumns = i % graphSize;
-            if (i % graphSize == 0)  numRows += 1;
+        setCoordinates(gridWidth, numElements, y, x, coords, graphSize);
+
+        //Next, print the weighted graph
+        for (int i = src + 1; i < numElements; i++) {
+                int xFrom = coords[i - 1][0] + radius / 2;
+                int yFrom = coords[i - 1][1] + radius / 2;
+                int xTo = coords[i][0] + radius / 2;
+                int yTo = coords[i][1] + radius / 2;
+                drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, String.valueOf(shortestPath[i]));
+                drawEdge(g, xFrom, yFrom, xTo, yTo);
+        }
+
+
+
+        for (int i = src; i < numElements; i++) {
             drawVertex(
                     g,
-                    leftX + (gridWidth * numColumns),
-                    topY + (gridWidth * numRows),
+                    coords[i][0],
+                    coords[i][1],
                     radius,
                     radius,
                     labelX,
                     labelY,
-                    i + 1);
+                    i);
         }
+    }
 
-        int numColumnsTo = 0;
-        int numRowsTo = 0;
+    private void setCoordinates(int gridWidth, int numElements, int y, int x, int[][] coords, int graphSize) {
+        Random r = new Random();
+
         for (int i = 0; i < numElements; i++) {
-            numColumns = i % graphSize;
-            if (i % graphSize == 0)  numRows += 1;
-
-            for (int j = 0; j < numElements; j++) {
-                numColumnsTo = i % graphSize;
-                if (i % graphSize == 0)  numRowsTo += 1;
-                drawEdge(
-                    g,
-                    leftX + (gridWidth * numColumns),
-                    topY + (gridWidth * numRows),
-                    leftX + (gridWidth * numColumnsTo),
-                    topY + (gridWidth * numRowsTo)
-                );
+            if (x == graphSize) {
+                x = 0;
+                y++;
             }
+            //x
+            coords[i][0] = (gridWidth * x++) + r.nextInt(numElements * 4 * graphSize);
+            //y
+            coords[i][1] = (gridWidth * y) + r.nextInt(numElements * 4 * graphSize);
         }
-
-
     }
 
     private void drawVertex(
@@ -75,19 +87,23 @@ public class GraphDisplay extends javax.swing.JPanel {
             int height,
             int labelX,
             int labelY,
-            int num) {
-
-        String content = String.valueOf(num);
-        g.setColor(java.awt.Color.ORANGE);
+            int i) {
+        g.setColor(Color.MAGENTA);
         g.fillOval(leftX, topY, width, height);
-        g.setColor(java.awt.Color.BLACK);
-        g.drawOval(leftX, topY, width, height);
-        g.setFont(new java.awt.Font(java.awt.Font.SANS_SERIF, java.awt.Font.BOLD, 24));
-        g.drawString(content, leftX + labelX, topY + labelY);
+        g.setColor(Color.BLACK);
+//        g.drawOval(leftX, topY, width, height);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+        g.drawString(String.valueOf(i), leftX + labelX, topY + labelY);
+    }
+
+    private void drawWeight(Graphics g, int x, int y, String weight) {
+        g.setColor(Color.BLACK);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+        g.drawString(weight, x + 2, y + 2);
     }
 
     private void drawEdge(Graphics g, int x1, int y1, int x2, int y2) {
-        g.setColor(java.awt.Color.BLACK);
+        g.setColor(Color.BLACK);
         g.drawLine(x1, y1, x2, y2);
     }
 }
