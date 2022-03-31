@@ -81,8 +81,6 @@ public class GraphDisplay extends javax.swing.JPanel {
         int[] shortestPath = input.dijkstra(src, target);
         numElements = shortestPath.length;
 
-        System.out.println(java.util.Arrays.toString(shortestPath));
-
         int sum = 0;
         for (int n : shortestPath
         ) {
@@ -91,9 +89,9 @@ public class GraphDisplay extends javax.swing.JPanel {
 
 
 
-//        for (int i = src + 1; i < numElements; i++) {
-//            drawEdge(g, coords[i - 1][0] + radius / 2, coords[i - 1][1] + radius / 2, coords[i][0] + radius / 2, coords[i][1] + radius / 2, Color.MAGENTA);
-//        }
+        for (int i = src + 1; i < numElements; i++) {
+            drawEdge(g, coords[i - 1][0] + radius / 2, coords[i - 1][1] + radius / 2, coords[i][0] + radius / 2, coords[i][1] + radius / 2, Color.MAGENTA);
+        }
         for (int i = src; i < numElements; i++) {
             drawVertex(
                     g,
@@ -121,7 +119,7 @@ public class GraphDisplay extends javax.swing.JPanel {
 //            }
 //        }
         String output = "The cost for the shortest path between " + src + " and " + (target-1) + " is " + sum;
-        String path = "The path is " + 78;
+        String path = "Shortest path: " + Arrays.toString(shortestPath);
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
         g.drawString(output, 50, 50);

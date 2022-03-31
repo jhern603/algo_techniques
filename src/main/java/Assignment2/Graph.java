@@ -89,44 +89,53 @@ public class Graph {
         return Arrays.copyOf(vert, total);
     }
 
-    int minDistance(int dist[], boolean sptSet[], int target) {
+    int minDistance(int path_array[], boolean sptSet[], int target)   {
+        // Initialize min value
         int min = Integer.MAX_VALUE, min_index = -1;
         for (int v = 0; v < target; v++)
-            if (sptSet[v] == false && dist[v] <= min) {
-                min = dist[v];
+            if (sptSet[v] == false && path_array[v] <= min) {
+                min = path_array[v];
                 min_index = v;
             }
 
         return min_index;
     }
 
-    int[] dijkstra(int src, int target) {
-        boolean[] spt = new boolean[target];
-        int[] distance = new int[target];
-        int INFINITY = Integer.MAX_VALUE;
+    int[] dijkstra(int src, int target)  {
 
+        int path_array[] = new int[target]; // The output array. dist[i] will hold
+        // the shortest distance from src to i
+
+        // spt (shortest path set) contains vertices that have shortest path
+        boolean sptSet[] = new boolean[target];
+
+        // Initially all the distances are INFINITE and stpSet[] is set to false
         for (int i = 0; i < target; i++) {
-            distance[i] = INFINITY;
-        }
-        distance[src] = 0;
-
-        for (int i = 0; i < target; i++) {
-            int vertex_U = minDistance(distance, spt, target);
-            spt[vertex_U] = true;
-
-            for (int vertex_V = 0; vertex_V < target; vertex_V++) {
-                if (matrix[vertex_U][vertex_V] > 0) {
-
-                    if (spt[vertex_V] == false && matrix[vertex_U][vertex_V] != INFINITY) {
-                        int newKey = matrix[vertex_U][vertex_V] + distance[vertex_U];
-                        if (newKey < distance[vertex_V]) distance[vertex_V] = newKey;
-                    }
-                }
-            }
+            path_array[i] = Integer.MAX_VALUE;
+            sptSet[i] = false;
         }
 
-        return distance;
+        // Path between vertex and itself is always 0
+        path_array[src] = 0;
+        // now find shortest path for all vertices
+        for (int count = 0; count < target - 1; count++) {
+            // call minDistance method to find the vertex with min distance
+            int u = minDistance(path_array, sptSet, target);
+            // the current vertex u is processed
+            sptSet[u] = true;
+            // process adjacent nodes of the current vertex
+            for (int v = 0; v < target; v++)
+
+                // if vertex v not in sptset then update it
+                if (!sptSet[v] && matrix[u][v] != 0 && path_array[u] !=
+                        Integer.MAX_VALUE && path_array[u]
+                        + matrix[u][v] < path_array[v])
+                    path_array[v] = path_array[u] + matrix[u][v];
+        }
+
+        return path_array;
     }
+
 
     public String toString() {
         String s = "";
