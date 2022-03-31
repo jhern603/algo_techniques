@@ -12,8 +12,6 @@ public class GraphDisplay extends javax.swing.JPanel {
     Graph input = new Graph("src/main/java/Assignment2/5by5Graph.txt");
     boolean[][] drawn;
 
-    // EXPLORE: print the whole graph WITH THE WEIGHTS, then just reprint the lines in a different
-    // color to depict shortest path
     public void paint(Graphics g) {
 
         int numElements;
@@ -35,10 +33,19 @@ public class GraphDisplay extends javax.swing.JPanel {
         graphSize = input.getVerticesNumber() + 1;
         numElements = (int) Math.pow(graphSize, 2);
         coords = new int[numElements][2];
+
+        System.out.println(input.getVerticesNumber());
+        for (int i = 0; i < input.getVerticesNumber(); i++) {
+            for (int j = 0; j < input.getVerticesNumber(); j++) {
+                System.out.print(input.getMatrix()[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println(Arrays.toString(input.getBounds()));
+
+        //Graphical Output
         setCoordinates(gridWidth, numElements, y, x, coords, graphSize);
         drawCompleteGraph(g, radius, labelX, labelY, coords, graphSize);
-
-        // DEBUG THIS
         drawDijkstraGraph(g, input, radius, labelX, labelY, coords);
     }
 
@@ -87,8 +94,6 @@ public class GraphDisplay extends javax.swing.JPanel {
             sum += n;
         }
 
-
-
         for (int i = src + 1; i < numElements; i++) {
             drawEdge(g, coords[i - 1][0] + radius / 2, coords[i - 1][1] + radius / 2, coords[i][0] + radius / 2, coords[i][1] + radius / 2, Color.MAGENTA);
         }
@@ -105,19 +110,6 @@ public class GraphDisplay extends javax.swing.JPanel {
                     Color.MAGENTA);
         }
 
-
-//        for (int i = src + 1; i < target; i++) {
-//            for (int j = i; j < target; j++) {
-//                int xFrom = coords[i - 1][0] + radius / 2;
-//                int yFrom = coords[i - 1][1] + radius / 2;
-//                int xTo = coords[j][0] + radius / 2;
-//                int yTo = coords[j][1] + radius / 2;
-//                String weight = String.valueOf(input.getMatrix()[i - 1][j]);
-//                if (Integer.parseInt(weight) != 0) {
-//                    drawEdge(g, xFrom, yFrom, xTo, yTo, Color.MAGENTA);
-//                }
-//            }
-//        }
         String output = "The cost for the shortest path between " + src + " and " + (target-1) + " is " + sum;
         String path = "Shortest path: " + Arrays.toString(shortestPath);
         g.setColor(Color.BLACK);
