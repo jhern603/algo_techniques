@@ -1,5 +1,7 @@
 package Assignment2;
 
+
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -8,6 +10,8 @@ import java.util.Random;
 
 public class GraphDisplay extends javax.swing.JPanel {
     Graph input = new Graph("src/main/java/Assignment2/5by5Graph.txt");
+    boolean[][] drawn;
+
     // EXPLORE: print the whole graph WITH THE WEIGHTS, then just reprint the lines in a different
     // color to depict shortest path
     public void paint(Graphics g) {
@@ -28,12 +32,13 @@ public class GraphDisplay extends javax.swing.JPanel {
         int[][] coords;
         int graphSize;
 
-        graphSize = input.getVerticesNumber();
+        graphSize = input.getVerticesNumber() + 1;
         numElements = (int) Math.pow(graphSize, 2);
         coords = new int[numElements][2];
         setCoordinates(gridWidth, numElements, y, x, coords, graphSize);
-        // DEBUG THIS
         drawCompleteGraph(g, radius, labelX, labelY, coords, graphSize);
+
+        // DEBUG THIS
         drawDijkstraGraph(g, input, radius, labelX, labelY, coords);
     }
 
@@ -44,7 +49,7 @@ public class GraphDisplay extends javax.swing.JPanel {
             int labelY,
             int[][] coords,
             int graphSize) {
-        boolean[][] drawn = new boolean[graphSize][graphSize];
+        drawn = new boolean[graphSize][graphSize];
         for (int i = 1; i < graphSize; i++) {
             for (int j = 1; j < graphSize; j++) {
                 int xFrom = coords[i - 1][0] + radius / 2;
@@ -57,7 +62,7 @@ public class GraphDisplay extends javax.swing.JPanel {
                     drawn[i - 1][j - 1] = true;
                     drawn[j - 1][i - 1] = true;
                     drawWeight(g, (xFrom + xTo) / 2, (yFrom + yTo) / 2, weight);
-                    drawEdge(g, xFrom, yFrom, xTo, yTo);
+                    drawEdge(g, xFrom, yFrom, xTo, yTo, Color.BLACK);
                 }
             }
         }
@@ -71,22 +76,24 @@ public class GraphDisplay extends javax.swing.JPanel {
     private void drawDijkstraGraph(
             Graphics g, Graph input, int radius, int labelX, int labelY, int[][] coords) {
         int numElements;
-        int target = 5;
-        int src = 2;
+        int target = input.getBounds()[1] + 1;
+        int src = input.getBounds()[0];
         int[] shortestPath = input.dijkstra(src, target);
         numElements = shortestPath.length;
-        drawEdges(g, src, numElements, radius, coords, Color.MAGENTA);
 
-        System.out.println( java.util.Arrays.toString( shortestPath ) );
+        System.out.println(java.util.Arrays.toString(shortestPath));
 
         int sum = 0;
-        for(int i = 0; i < shortestPath.length; i++) {
-            sum += shortestPath[i];
+        for (int n : shortestPath
+        ) {
+            sum += n;
         }
-        String output = "The cost for the shortest path between "+src+" and "+target+" is " + sum;
-        g.setColor(Color.BLACK);
-        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
-        g.drawString(output, 50, 50);
+
+
+
+//        for (int i = src + 1; i < numElements; i++) {
+//            drawEdge(g, coords[i - 1][0] + radius / 2, coords[i - 1][1] + radius / 2, coords[i][0] + radius / 2, coords[i][1] + radius / 2, Color.MAGENTA);
+//        }
         for (int i = src; i < numElements; i++) {
             drawVertex(
                     g,
@@ -99,28 +106,31 @@ public class GraphDisplay extends javax.swing.JPanel {
                     i,
                     Color.MAGENTA);
         }
-    }
 
-    private void drawEdge(Graphics g, int x1, int y1, int x2, int y2) {
+
+//        for (int i = src + 1; i < target; i++) {
+//            for (int j = i; j < target; j++) {
+//                int xFrom = coords[i - 1][0] + radius / 2;
+//                int yFrom = coords[i - 1][1] + radius / 2;
+//                int xTo = coords[j][0] + radius / 2;
+//                int yTo = coords[j][1] + radius / 2;
+//                String weight = String.valueOf(input.getMatrix()[i - 1][j]);
+//                if (Integer.parseInt(weight) != 0) {
+//                    drawEdge(g, xFrom, yFrom, xTo, yTo, Color.MAGENTA);
+//                }
+//            }
+//        }
+        String output = "The cost for the shortest path between " + src + " and " + (target-1) + " is " + sum;
+        String path = "The path is " + 78;
         g.setColor(Color.BLACK);
-        g.drawLine(x1, y1, x2, y2);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        g.drawString(output, 50, 50);
+        g.drawString(path, 50, 75);
     }
 
-    private void drawEdges(
-            java.awt.Graphics g,
-            int src,
-            int numElements,
-            int radius,
-            int[][] coords,
-            Color color) {
-        for (int i = src + 1; i < numElements; i++) {
-            int xFrom = coords[i - 1][0] + radius / 2;
-            int yFrom = coords[i - 1][1] + radius / 2;
-            int xTo = coords[i][0] + radius / 2;
-            int yTo = coords[i][1] + radius / 2;
-            g.setColor(color);
-            g.drawLine(xFrom, yFrom, xTo, yTo);
-        }
+    private void drawEdge(Graphics g, int x1, int y1, int x2, int y2, Color color) {
+        g.setColor(color);
+        g.drawLine(x1, y1, x2, y2);
     }
 
     private void drawVertex(
@@ -140,27 +150,30 @@ public class GraphDisplay extends javax.swing.JPanel {
         g.drawString(String.valueOf(i), leftX + labelX, topY + labelY);
     }
 
-    private void setCoordinates(
-            int gridWidth, int numElements, int y, int x, int[][] coords, int graphSize) {
-        Random r = new Random();
-
-        for (int i = 0; i < numElements; i++) {
-            if (x == graphSize) {
-                x = 0;
-                y++;
-            }
-            // x
-            coords[i][0] = (gridWidth * x++) + r.nextInt(numElements * graphSize);
-            // y
-            coords[i][1] = (gridWidth * y + 50) + r.nextInt(numElements * graphSize) + 50;
-        }
-    }
-
     private void drawWeight(Graphics g, int x, int y, String weight) {
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         g.drawString(weight, x + 2, y + 2);
     }
+
+    private void setCoordinates(
+            int gridWidth, int numElements, int y, int x, int[][] coords, int graphSize) {
+        Random r = new Random();
+
+        for (int i = 0; i < numElements; i++) {
+
+            if (x == graphSize) {
+                x = 0;
+                y++;
+            }
+            // x
+            coords[i][0] = (gridWidth * x++) + r.nextInt(graphSize-1);
+            // y
+            coords[i][1] = (gridWidth * y * 2) + r.nextInt((int) Math.pow(graphSize-1, 4));
+        }
+    }
+
+
 }
 /*
        System.out.printf("Shortest path between %d and %d is : ", src, target);

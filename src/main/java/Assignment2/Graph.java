@@ -125,7 +125,7 @@ public class Graph {
             }
         }
 
-        return Arrays.copyOf(distance, target);
+        return distance;
     }
 
     public String toString() {
