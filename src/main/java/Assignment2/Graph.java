@@ -5,9 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- * Borrowd from Prog15_08
- */
+/** Borrowd from Prog15_08 */
 public class Graph {
 
     private int verticesNumber;
@@ -58,13 +56,12 @@ public class Graph {
         in.close();
     }
 
-
     public int getVerticesNumber() {
         return verticesNumber;
     }
 
     public int[] getBounds() {
-        return new int[]{s, t};
+        return new int[] {s, t};
     }
 
     public int[][] getMatrix() {
@@ -76,7 +73,7 @@ public class Graph {
      *
      * @param v given vertex
      * @return list of vertices adjacent to v stored in an array; size of array = number of adjacent
-     * vertices
+     *     vertices
      */
     public int[] findAdjacencyVertices(int v) {
         int[] vert = new int[verticesNumber];
@@ -122,13 +119,11 @@ public class Graph {
 
                     if (spt[vertex_V] == false && matrix[vertex_U][vertex_V] != INFINITY) {
                         int newKey = matrix[vertex_U][vertex_V] + distance[vertex_U];
-                        if (newKey < distance[vertex_V])
-                            distance[vertex_V] = newKey;
+                        if (newKey < distance[vertex_V]) distance[vertex_V] = newKey;
                     }
                 }
             }
         }
-
 
         return Arrays.copyOf(distance, target);
     }
