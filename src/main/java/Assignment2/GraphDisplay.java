@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * @author Jose Hernandez, PID: 5712864
- * @author Ziad Malik
+ * @author Ziad Malik, PID: 6174850
  */
 
 public class GraphDisplay extends JPanel {

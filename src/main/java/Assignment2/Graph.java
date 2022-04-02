@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /**
  * @author Jose Hernandez, PID: 5712864
- * @author Ziad Malik
+ * @author Ziad Malik, PID: 6174850
  */
 
 /**
