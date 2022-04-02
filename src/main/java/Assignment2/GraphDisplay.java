@@ -225,7 +225,7 @@ public class GraphDisplay extends JPanel {
             // x
             coords[i][0] = (gridWidth * x++) + r.nextInt(graphSize - 1);
             // y
-            coords[i][1] = (gridWidth * y * 2) + r.nextInt((int) Math.pow(graphSize - 1, 4));
+            coords[i][1] = (gridWidth * y) + r.nextInt((int) Math.pow(graphSize - 1, 3.5));
         }
     }
 
