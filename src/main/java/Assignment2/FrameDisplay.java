@@ -7,8 +7,8 @@ package Assignment2;
  */
 public class FrameDisplay extends javax.swing.JFrame
 {
-    int WIDTH = 864;
-    int HEIGHT = 864;
+    int WIDTH = 850;
+    int HEIGHT = 720;
 
     public FrameDisplay()
     {
