@@ -6,7 +6,7 @@ import java.util.Random;
 public class Prog19_01 {
     public Prog19_01() {
         for (int i = 0; i < 10; i++) {
-            int[] a = new int[6];
+            int[] a = new int[10];
             randomPermutation(a);
             System.out.println(Arrays.toString(a));
         }
@@ -15,6 +15,7 @@ public class Prog19_01 {
     public static void main(String[] args) {
         new Prog19_01();
     }
+
 
     public void randomPermutation(int[] a) {
         for (int i = 0; i < a.length; i++) {

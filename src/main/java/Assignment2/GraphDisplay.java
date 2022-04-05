@@ -1,14 +1,9 @@
 package Assignment2;
 
-<<<<<<< HEAD
-
-import java.awt.*;
-=======
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
->>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
 import java.util.Arrays;
 import java.util.Random;
 
@@ -21,14 +16,11 @@ public class GraphDisplay extends JPanel {
     Graph input = new Graph("src/main/java/Assignment2/5by5Graph.txt");
     boolean[][] drawn;
 
-<<<<<<< HEAD
-=======
     /**
      * Overwritten paint method from JPanel
      *
      * @param g Graphics object
      */
->>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
     public void paint(Graphics g) {
 
         int numElements, graphSize;
@@ -43,7 +35,6 @@ public class GraphDisplay extends JPanel {
         numElements = (int) Math.pow(graphSize, 2);
         coords = new int[numElements][2];
 
-<<<<<<< HEAD
         System.out.println(input.getVerticesNumber());
         for (int i = 0; i < input.getVerticesNumber(); i++) {
             for (int j = 0; j < input.getVerticesNumber(); j++) {
@@ -54,11 +45,8 @@ public class GraphDisplay extends JPanel {
         System.out.println(Arrays.toString(input.getBounds()));
 
         //Graphical Output
-        setCoordinates(gridWidth, numElements, y, x, coords, graphSize);
-=======
         setCoordinates(gridWidth, numElements, coords, graphSize);
 
->>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
         drawCompleteGraph(g, radius, labelX, labelY, coords, graphSize);
         drawDijkstraGraph(g, input, radius, labelX, labelY, coords);
     }
@@ -128,10 +116,7 @@ public class GraphDisplay extends JPanel {
             sum += n;
         }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
         for (int i = src + 1; i < numElements; i++) {
             drawEdge(g, coords[i - 1][0] + radius / 2, coords[i - 1][1] + radius / 2, coords[i][0] + radius / 2, coords[i][1] + radius / 2, Color.MAGENTA);
         }
@@ -148,22 +133,6 @@ public class GraphDisplay extends JPanel {
                     Color.MAGENTA);
         }
 
-<<<<<<< HEAD
-=======
-
-//        for (int i = src + 1; i < target; i++) {
-//            for (int j = i; j < target; j++) {
-//                int xFrom = coords[i - 1][0] + radius / 2;
-//                int yFrom = coords[i - 1][1] + radius / 2;
-//                int xTo = coords[j][0] + radius / 2;
-//                int yTo = coords[j][1] + radius / 2;
-//                String weight = String.valueOf(input.getMatrix()[i - 1][j]);
-//                if (Integer.parseInt(weight) != 0) {
-//                    drawEdge(g, xFrom, yFrom, xTo, yTo, Color.MAGENTA);
-//                }
-//            }
-//        }
->>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
         String output = "The cost for the shortest path between " + src + " and " + (target - 1) + " is " + sum;
         String path = "Shortest path: " + Arrays.toString(shortestPath);
         g.setColor(Color.BLACK);
@@ -253,11 +222,8 @@ public class GraphDisplay extends JPanel {
             // x
             coords[i][0] = (gridWidth * x++) + r.nextInt(graphSize - 1);
             // y
-<<<<<<< HEAD
             coords[i][1] = (gridWidth * y * 2) + r.nextInt((int) Math.pow(graphSize - 1, 4));
-=======
-            coords[i][1] = (gridWidth * y) + r.nextInt((int) Math.pow(graphSize - 1, 3.5));
->>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
+
         }
     }
 

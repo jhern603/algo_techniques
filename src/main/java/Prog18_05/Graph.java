@@ -70,6 +70,20 @@ public class Graph implements Prog18_01.GraphInterface {
         matrix[w][v] = 0;
     }
 
+    public int TSP_randomsampling(int[] shortestRoute) {
+        int numberOfSamples = 20;
+        int bestDistance = Integer.MAX_VALUE;
+
+        java.util.stream.IntStream.range( 0, numberOfSamples )
+                                  .mapToObj( i -> new int[ verticesNumber ] )
+                                  .forEach( a -> {
+                                      int currentDistance = totalDistance( a );
+                                      if ( currentDistance < bestDistance )
+                                          System.arraycopy( a, 0, shortestRoute, 0, verticesNumber );
+                                  } );
+        return bestDistance;
+    }
+
     /**
      * Finds vertices adjacent to a given vertex.
      *
