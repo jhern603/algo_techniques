@@ -2,15 +2,15 @@ package Prog15_05;
 
 import java.math.BigInteger;
 
-public class Prog15_05{
-  final BigInteger ZERO = BigInteger.ZERO;
-  final BigInteger ONE = BigInteger.ONE;
-  final BigInteger TWO = BigInteger.valueOf(2);
+public class Prog15_05 {
+    final BigInteger ZERO = BigInteger.ZERO;
+    final BigInteger ONE = BigInteger.ONE;
+    final BigInteger TWO = BigInteger.valueOf(2);
 
     public static void main(String[] args) {
-      new Prog15_05();
+        new Prog15_05();
     }
-    
+
 //    public Prog15_05(){
 //      BigInteger n;
 //      final BigInteger FIRST = new BigInteger("10000000000000819");;

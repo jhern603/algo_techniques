@@ -1,10 +1,13 @@
 package Prog18_05;
 
-public class Queue
-{
+public class Queue {
 
-    public Queue()
-    {
+    private final int[] list;
+    private final int size;
+    private int count;
+    private int front, back;
+
+    public Queue() {
         size = 100;
         list = new int[size];
 
@@ -14,8 +17,7 @@ public class Queue
         count = 0;
     }
 
-    public Queue(int s)
-    {
+    public Queue(int s) {
         size = s;
         list = new int[size];
 
@@ -25,31 +27,22 @@ public class Queue
         count = 0;
     }
 
-    public void enqueue(int c)
-    {
+    public void enqueue(int c) {
         back = (back + 1) % size;
         list[back] = c;
         count++;
     }
 
-    public void dequeue()
-    {
+    public void dequeue() {
         front = (front + 1) % size;
         count--;
     }
 
-    public int getFront()
-    {
+    public int getFront() {
         return list[front];
     }
 
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return count == 0;
     }
-
-    private int[] list;
-    private int size;
-    private int count;
-    private int front, back;
 }

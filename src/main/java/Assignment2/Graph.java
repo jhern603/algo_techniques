@@ -6,12 +6,16 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
+<<<<<<< HEAD
+ * Borrowd from Prog15_08
+=======
  * @author Jose Hernandez, PID: 5712864
  * @author Ziad Malik, PID: 6174850
  */
 
 /**
  * Borrowd from 5
+>>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
  */
 public class Graph {
 
@@ -45,7 +49,7 @@ public class Graph {
             System.out.println("File not found!");
             System.exit(0);
         }
-        Boolean done = false;
+        boolean done = false;
         while (in.hasNextLine()) {
             verticesNumber = in.nextInt();
             matrix = new int[verticesNumber][verticesNumber];
@@ -96,6 +100,10 @@ public class Graph {
         return Arrays.copyOf(vert, total);
     }
 
+<<<<<<< HEAD
+    int minDistance(int[] path_array, boolean[] sptSet, int target) {
+        // Initialize min value
+=======
     /**
      * Calculates the minimum distance between all vertices up to target
      *
@@ -106,9 +114,10 @@ public class Graph {
      */
     int minDistance(int path_array[], boolean sptSet[], int target) {
 
+>>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
         int min = Integer.MAX_VALUE, min_index = -1;
         for (int v = 0; v < target; v++)
-            if (sptSet[v] == false && path_array[v] <= min) {
+            if (!sptSet[v] && path_array[v] <= min) {
                 min = path_array[v];
                 min_index = v;
             }
@@ -116,6 +125,15 @@ public class Graph {
         return min_index;
     }
 
+<<<<<<< HEAD
+    int[] dijkstra(int src, int target) {
+
+        int[] path_array = new int[target]; // The output array. dist[i] will hold
+        // the shortest distance from src to i
+
+        // spt (shortest path set) contains vertices that have shortest path
+        boolean[] sptSet = new boolean[target];
+=======
     /**
      * Implementation of Dijkstra's shortest path algorithm using a priority queue
      *
@@ -127,6 +145,7 @@ public class Graph {
 
         int path_array[] = new int[target];
         boolean sptSet[] = new boolean[target];
+>>>>>>> cca2f843655f7ff29df5ef5fbf1fe5e40188643e
 
         for (int i = 0; i < target; i++) {
             path_array[i] = Integer.MAX_VALUE;
@@ -148,15 +167,15 @@ public class Graph {
     }
 
     public String toString() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
 
         for (int i = 0; i < verticesNumber; i++) {
             for (int j = 0; j < verticesNumber; j++) {
-                s += matrix[i][j] + " ";
+                s.append(matrix[i][j]).append(" ");
             }
-            s += "\n";
+            s.append("\n");
         }
 
-        return s;
+        return s.toString();
     }
 }

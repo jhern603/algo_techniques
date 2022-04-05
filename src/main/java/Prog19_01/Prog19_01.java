@@ -4,16 +4,16 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Prog19_01 {
-    public static void main(String[] args) {
-        new Prog19_01();
-    }
-
     public Prog19_01() {
         for (int i = 0; i < 10; i++) {
             int[] a = new int[6];
             randomPermutation(a);
             System.out.println(Arrays.toString(a));
         }
+    }
+
+    public static void main(String[] args) {
+        new Prog19_01();
     }
 
     public void randomPermutation(int[] a) {

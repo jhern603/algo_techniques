@@ -1,10 +1,16 @@
 package Prog16_01;
+
 /**
  * Queue class. Implements a queue of nodes.
  *
  * @author A. Hernandez. COP4534 Algorithm Techniques
  */
 public class Queue {
+
+    private final Node[] list;
+    private final int size;
+    private int count;
+    private int front, back;
 
     public Queue() {
         size = 100;
@@ -44,9 +50,4 @@ public class Queue {
     public boolean isEmpty() {
         return count == 0;
     }
-
-    private Node[] list;
-    private int size;
-    private int count;
-    private int front, back;
 }

@@ -75,7 +75,7 @@ public class Graph implements Prog18_01.GraphInterface {
      *
      * @param v given vertex
      * @return list of vertices adjacent to v stored in an array; size of array = number of adjacent
-     *     vertices
+     * vertices
      */
     public int[] findAdjacencyVertices(int v) {
         int[] vert = new int[verticesNumber];
@@ -212,10 +212,10 @@ public class Graph implements Prog18_01.GraphInterface {
         System.out.println();
     }
 
-    int minDistance(int dist[], boolean sptSet[], int target) {
+    int minDistance(int[] dist, boolean[] sptSet, int target) {
         int min = Integer.MAX_VALUE, min_index = -1;
         for (int v = 0; v < target; v++)
-            if (sptSet[v] == false && dist[v] <= min) {
+            if (!sptSet[v] && dist[v] <= min) {
                 min = dist[v];
                 min_index = v;
             }
@@ -240,7 +240,7 @@ public class Graph implements Prog18_01.GraphInterface {
             for (int vertex_V = 0; vertex_V < target; vertex_V++) {
                 if (matrix[vertex_U][vertex_V] > 0) {
 
-                    if (spt[vertex_V] == false && matrix[vertex_U][vertex_V] != INFINITY) {
+                    if (!spt[vertex_V] && matrix[vertex_U][vertex_V] != INFINITY) {
                         int newKey = matrix[vertex_U][vertex_V] + distance[vertex_U];
                         if (newKey < distance[vertex_V]) distance[vertex_V] = newKey;
                     }
@@ -252,15 +252,15 @@ public class Graph implements Prog18_01.GraphInterface {
     }
 
     public String toString() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
 
         for (int i = 0; i < verticesNumber; i++) {
             for (int j = 0; j < verticesNumber; j++) {
-                s += matrix[i][j] + " ";
+                s.append(matrix[i][j]).append(" ");
             }
-            s += "\n";
+            s.append("\n");
         }
 
-        return s;
+        return s.toString();
     }
 }

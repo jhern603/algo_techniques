@@ -1,6 +1,14 @@
 package Prog18_03;
 
 public class Dimensions {
+    public int leftX;
+    public int topY;
+    public int height;
+    public int width;
+    public int labelX;
+    public int labelY;
+    public int gridWidth;
+
     public int getLeftX() {
         return leftX;
     }
@@ -56,12 +64,4 @@ public class Dimensions {
     public void setGridWidth(int gridWidth) {
         this.gridWidth = gridWidth;
     }
-
-    public int leftX;
-    public int topY;
-    public int height;
-    public int width;
-    public int labelX;
-    public int labelY;
-    public int gridWidth;
 }

@@ -2,7 +2,7 @@ package Assignment1;
 
 /**
  * @author Jose Hernandez, 5712864 Class containing search algorithms to find integer "n" in an
- *     array of integers
+ * array of integers
  */
 public class SearchAlgorithms {
     int comparisonCount;
@@ -19,7 +19,7 @@ public class SearchAlgorithms {
      * Modified sequential search that finds and returns the number of occurences of element "x" in
      * an array arr in O(n)
      *
-     * @param n number to search for
+     * @param n   number to search for
      * @param len length of array
      * @param arr array
      * @return number of occurences of n in arr
@@ -35,7 +35,7 @@ public class SearchAlgorithms {
                 sizeOfBlock++;
             }
             this.comparisonCount++;
-            if(arr[i + 1] != n && found)
+            if (arr[i + 1] != n && found)
                 break;
         }
         return sizeOfBlock;
@@ -46,8 +46,8 @@ public class SearchAlgorithms {
      * int array list in O(M+logN)
      *
      * @param list array to be searched
-     * @param x element to search for
-     * @param len length of the array
+     * @param x    element to search for
+     * @param len  length of the array
      * @return number of occurrences of element "x"
      */
     public int modifiedSearch(int[] list, int x, int len) {
@@ -74,9 +74,9 @@ public class SearchAlgorithms {
      * Determines if search element is in locations [first, last] of given array. (Borrowed from
      * Prog14_01)
      *
-     * @param list sorted array
+     * @param list  sorted array
      * @param first first element in the array to be traversed
-     * @param x element to search for
+     * @param x     element to search for
      * @return Returns the position in where "x" is found
      */
     private int binarySearch(int[] list, int first, int last, int x) {
@@ -106,8 +106,8 @@ public class SearchAlgorithms {
      * algorithm runs in O(log n)
      *
      * @param list array to be searched through
-     * @param x element to look for
-     * @param len length of array
+     * @param x    element to look for
+     * @param len  length of array
      * @return The number of occurrences of x
      */
     public int boundarySearch(int[] list, int x, int len) {
@@ -118,13 +118,14 @@ public class SearchAlgorithms {
         rightEnd = locateRightEnd(list, 0, len - 1, x);
         return rightEnd - leftEnd;
     }
+
     /**
      * Finds the leftmost occurrence of x in a list of ints
      *
-     * @param list sorted array
+     * @param list  sorted array
      * @param first left index
-     * @param last right index
-     * @param x element to search for
+     * @param last  right index
+     * @param x     element to search for
      * @return Returns the leftmost position in where "x" was first found
      */
     private int locateLeftEnd(int[] list, int first, int last, int x) {
@@ -144,10 +145,10 @@ public class SearchAlgorithms {
     /**
      * Finds the Rightmost occurrence of x in a list of ints
      *
-     * @param list sorted array
+     * @param list  sorted array
      * @param first left index
-     * @param last right index
-     * @param x element to search for
+     * @param last  right index
+     * @param x     element to search for
      * @return Returns the Rightmost position in where "x" was first found
      */
     private int locateRightEnd(int[] list, int first, int last, int x) {

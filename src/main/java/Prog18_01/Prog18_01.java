@@ -6,7 +6,7 @@ public class Prog18_01 {
         print("test");
     }
 
-    private static void print(Object s){
+    private static void print(Object s) {
         System.out.println(s);
     }
 }
