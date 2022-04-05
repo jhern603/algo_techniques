@@ -7,7 +7,7 @@ public class Prog15_02 {
         for (int i = 0; i < scalingArray.length; i++) {
             scalingArray[i] = i;
         }
-        Math.sqrt(50);
+
         final long startTime = System.nanoTime();
         Algorithms.quickSort(scalingArray);
         final long endTime = System.nanoTime();

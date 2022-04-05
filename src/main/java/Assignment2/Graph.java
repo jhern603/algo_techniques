@@ -40,7 +40,7 @@ public class Graph {
             System.out.println("File not found!");
             System.exit(0);
         }
-        Boolean done = false;
+        boolean done = false;
         while (in.hasNextLine()) {
             verticesNumber = in.nextInt();
             matrix = new int[verticesNumber][verticesNumber];
@@ -95,7 +95,7 @@ public class Graph {
         // Initialize min value
         int min = Integer.MAX_VALUE, min_index = -1;
         for (int v = 0; v < target; v++)
-            if (sptSet[v] == false && path_array[v] <= min) {
+            if (!sptSet[v] && path_array[v] <= min) {
                 min = path_array[v];
                 min_index = v;
             }
@@ -140,15 +140,15 @@ public class Graph {
 
 
     public String toString() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
 
         for (int i = 0; i < verticesNumber; i++) {
             for (int j = 0; j < verticesNumber; j++) {
-                s += matrix[i][j] + " ";
+                s.append(matrix[i][j]).append(" ");
             }
-            s += "\n";
+            s.append("\n");
         }
 
-        return s;
+        return s.toString();
     }
 }

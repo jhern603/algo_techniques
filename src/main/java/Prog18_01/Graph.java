@@ -53,15 +53,15 @@ public class Graph implements GraphInterface {
     }
 
     public String toString() {
-        String s = "";
+        StringBuilder s = new StringBuilder();
 
         for (int i = 0; i < verticesNumber; i++) {
             for (int j = 0; j < verticesNumber; j++) {
-                s += matrix[i][j] + " ";
+                s.append(matrix[i][j]).append(" ");
             }
-            s += "\n";
+            s.append("\n");
         }
 
-        return s;
+        return s.toString();
     }
 }
