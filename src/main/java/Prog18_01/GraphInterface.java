@@ -1,6 +1,6 @@
 package Prog18_01;
 
-public interface GraphInterface{
+public interface GraphInterface {
     void addEdge(int v, int w);
 
     void removeEdge(int v, int w);

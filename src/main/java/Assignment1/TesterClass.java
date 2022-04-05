@@ -21,7 +21,7 @@ public class TesterClass {
         ArrayUtilities util = new ArrayUtilities();
 
         for (int i = 0; i <= 10000; i++) {
-            int[] nums = new int[i+10];
+            int[] nums = new int[i + 10];
             util.fillArray(nums, 20);
             int searchFor = new Random().nextInt(20);
 

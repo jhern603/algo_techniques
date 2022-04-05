@@ -1,10 +1,7 @@
 package Assignment2;
 
 
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -110,7 +107,7 @@ public class GraphDisplay extends javax.swing.JPanel {
                     Color.MAGENTA);
         }
 
-        String output = "The cost for the shortest path between " + src + " and " + (target-1) + " is " + sum;
+        String output = "The cost for the shortest path between " + src + " and " + (target - 1) + " is " + sum;
         String path = "Shortest path: " + Arrays.toString(shortestPath);
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
@@ -157,9 +154,9 @@ public class GraphDisplay extends javax.swing.JPanel {
                 y++;
             }
             // x
-            coords[i][0] = (gridWidth * x++) + r.nextInt(graphSize-1);
+            coords[i][0] = (gridWidth * x++) + r.nextInt(graphSize - 1);
             // y
-            coords[i][1] = (gridWidth * y * 2) + r.nextInt((int) Math.pow(graphSize-1, 4));
+            coords[i][1] = (gridWidth * y * 2) + r.nextInt((int) Math.pow(graphSize - 1, 4));
         }
     }
 

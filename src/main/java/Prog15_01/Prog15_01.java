@@ -5,12 +5,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-/** Illustrates use of Random utilities. */
+/**
+ * Illustrates use of Random utilities.
+ */
 public class Prog15_01 {
-    public static void main(String[] args) {
-        new Prog15_01();
-    }
-
     public Prog15_01() {
         int[] list = new int[20];
 
@@ -35,12 +33,18 @@ public class Prog15_01 {
         printArray(list);
 
         System.out.println("Shuffled Array");
-        list = new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        list = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
         shuffleArray(list);
         printArray(list);
     }
 
-    /** Fills input array with random integers in [0, 100] using a uniform distribution. */
+    public static void main(String[] args) {
+        new Prog15_01();
+    }
+
+    /**
+     * Fills input array with random integers in [0, 100] using a uniform distribution.
+     */
     public void fillArrayUniformDistribution(int[] list) {
         Random rnd = new Random();
         for (int i = 0; i < list.length; i++) {
@@ -48,7 +52,9 @@ public class Prog15_01 {
         }
     }
 
-    /** Fills input array with random integers in [-infty, +infty] using a normal distribution. */
+    /**
+     * Fills input array with random integers in [-infty, +infty] using a normal distribution.
+     */
     public void fillArrayNormalDistribution(int[] list) {
         Random rnd = new Random();
         for (int i = 0; i < list.length; i++) {
@@ -64,7 +70,9 @@ public class Prog15_01 {
         System.out.println();
     }
 
-    /** Fills input array with integers in [0, 1] with approximately x% of 0's. */
+    /**
+     * Fills input array with integers in [0, 1] with approximately x% of 0's.
+     */
     public void fillArrayWithOsAnd1s(int[] list, int x) {
         Random rnd = new Random();
         for (int i = 0; i < list.length; i++) {
@@ -73,7 +81,9 @@ public class Prog15_01 {
         }
     }
 
-    /** Randomly rearrange the input array. */
+    /**
+     * Randomly rearrange the input array.
+     */
     public void shuffleArray(int[] list) {
         ArrayList<Integer> temp = new ArrayList<>();
         for (int i : list) {

@@ -2,17 +2,15 @@ package Assignment2;
 
 /**
  * Defines a frame a panel with the drawings will be added to.
- * 
+ *
  * @author Prof. Antonio Hernandez
  */
-public class FrameDisplay extends javax.swing.JFrame
-{
+public class FrameDisplay extends javax.swing.JFrame {
     int WIDTH = 864;
     int HEIGHT = 864;
 
-    public FrameDisplay()
-    {
-        setTitle("Graph Display");
+    public FrameDisplay() {
+        setTitle("2D Plane Display");
         setSize(WIDTH, HEIGHT);
 
         GraphDisplay panel = new GraphDisplay();

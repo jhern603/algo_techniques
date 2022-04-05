@@ -10,9 +10,11 @@ import java.util.Random;
  * @author Prof. Antonio Hernandez
  */
 public class Algorithms {
-    private static Random rnd = new Random();
+    private static final Random rnd = new Random();
 
-    /** Recursive quickSort algorithm. Deterministic. */
+    /**
+     * Recursive quickSort algorithm. Deterministic.
+     */
     public static void quickSort(int[] list) {
         quicksort(list, 0, list.length - 1);
     }
@@ -67,14 +69,19 @@ public class Algorithms {
     private static int findPivotLocationDeterministic(int b, int e) {
         return b;
     }
-    /** Fills input array with random integers in [0, list.length] using a uniform distribution. */
+
+    /**
+     * Fills input array with random integers in [0, list.length] using a uniform distribution.
+     */
     public static void fillArrayUniformDistribution(int[] list) {
         for (int i = 0; i < list.length; i++) {
             list[i] = rnd.nextInt(list.length);
         }
     }
 
-    /** Fills input array with random integers in [-infty, +infty] using a normal distribution. */
+    /**
+     * Fills input array with random integers in [-infty, +infty] using a normal distribution.
+     */
     public static void fillArrayNormalDistribution(int[] list) {
         for (int i = 0; i < list.length; i++) {
             list[i] = (int) Math.round(rnd.nextGaussian() * 10);
@@ -89,7 +96,9 @@ public class Algorithms {
         System.out.println();
     }
 
-    /** Fills input array with integers in [0, 1] with approximately x% of 0's. */
+    /**
+     * Fills input array with integers in [0, 1] with approximately x% of 0's.
+     */
     public static void fillArrayWithOsAnd1s(int[] list, int x) {
         for (int i = 0; i < list.length; i++) {
             if (rnd.nextInt(100) <= x) list[i] = 0;
@@ -97,7 +106,9 @@ public class Algorithms {
         }
     }
 
-    /** Randomly rearrange the input array. */
+    /**
+     * Randomly rearrange the input array.
+     */
     public static void shuffleArray(int[] list) {
         ArrayList<Integer> temp = new ArrayList<>();
         for (int i : list) {

@@ -1,10 +1,13 @@
 package Prog16_01;
+
 /**
  * BinarySearchTree class. Implements a binary search tree.
  *
  * @author A. Hernandez. COP4534 Algorithm Techniques
  */
 public class BinarySearchTree {
+    private final Node root; // root of the bst; implemented as a dummy node.
+
     public BinarySearchTree() {
         root = new Node(); // dummy node as the root
         root.setLeftChild(null);
@@ -50,8 +53,6 @@ public class BinarySearchTree {
             root.setLeftChild(p);
         } else add(x, root.getLeftChild());
     }
-
-    private Node root; // root of the bst; implemented as a dummy node.
 
     private void preorder(Node p) {
         if (p != null) {

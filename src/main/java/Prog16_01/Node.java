@@ -1,4 +1,5 @@
 package Prog16_01;
+
 /**
  * Node class. Implements the node of a binary search tree.
  *
@@ -25,20 +26,20 @@ public class Node {
         return info;
     }
 
-    Node getLeftChild() {
-        return left;
-    }
-
-    Node getRightChild() {
-        return right;
-    }
-
     void setInfo(int x) {
         info = x;
     }
 
+    Node getLeftChild() {
+        return left;
+    }
+
     void setLeftChild(Node l) {
         left = l;
+    }
+
+    Node getRightChild() {
+        return right;
     }
 
     void setRightChild(Node r) {

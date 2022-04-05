@@ -36,7 +36,7 @@ public class GraphDisplay extends JPanel {
          */
         int row = 0;
         for (int i = 0, j = 0; i < numElements; i++) {
-            if(i % (int) Math.sqrt(numElements) == 0){
+            if (i % (int) Math.sqrt(numElements) == 0) {
                 j++;
                 row = 0;
             }

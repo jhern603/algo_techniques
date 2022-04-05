@@ -75,7 +75,7 @@ public class Graph implements Prog18_01.GraphInterface {
      *
      * @param v given vertex
      * @return list of vertices adjacent to v stored in an array; size of array = number of adjacent
-     *     vertices
+     * vertices
      */
     public int[] findAdjacencyVertices(int v) {
         int[] vert = new int[verticesNumber];
@@ -212,7 +212,7 @@ public class Graph implements Prog18_01.GraphInterface {
         System.out.println();
     }
 
-    int minDistance(int dist[], boolean sptSet[], int target) {
+    int minDistance(int[] dist, boolean[] sptSet, int target) {
         int min = Integer.MAX_VALUE, min_index = -1;
         for (int v = 0; v < target; v++)
             if (sptSet[v] == false && dist[v] <= min) {

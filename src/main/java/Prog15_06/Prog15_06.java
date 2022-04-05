@@ -5,7 +5,7 @@ import java.util.Random;
 public class Prog15_06 {
     public static void main(String[] args) {
         int x = 1000000000;
-            System.out.println(isProbablyPrime(x, x));
+        System.out.println(isProbablyPrime(x, x));
     }
 
     public static boolean isProbablyPrime(int n, int a) {

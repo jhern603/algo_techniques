@@ -8,13 +8,13 @@ public class Prog16_02 {
 
     int count = 0;
 
-    public static void main(String[] args) {
-        new Prog16_02();
-    }
-
     public Prog16_02() {
         int n = 11;
         printPermutations(n);
+    }
+
+    public static void main(String[] args) {
+        new Prog16_02();
     }
 
     public void printPermutations(int n) {
@@ -22,7 +22,7 @@ public class Prog16_02 {
     }
 
     private void printPermutations(int[] a, int k) {
-        if ( k == a.length ) printArray(a);
+        if (k == a.length) printArray(a);
         else {
             ArrayList<Integer> Sk = constructCandidateSe(a, k);
             for (int s : Sk) {

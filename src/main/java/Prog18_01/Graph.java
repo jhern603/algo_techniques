@@ -1,14 +1,15 @@
 package Prog18_01;
 
 import java.util.Arrays;
+
 /**
  * Implements a Graph. Uses an adjacency matrix to represent the graph.
  *
  * @author Prof. Antonio Hernandez
  */
 public class Graph implements GraphInterface {
-    private int verticesNumber;
-    private int[][] matrix; // adjacency matrix
+    private final int verticesNumber;
+    private final int[][] matrix; // adjacency matrix
 
     public Graph() {
         verticesNumber = 5;
@@ -35,7 +36,7 @@ public class Graph implements GraphInterface {
      *
      * @param v given vertex
      * @return list of vertices adjacent to v stored in an array; size of array = number of adjacent
-     *     vertices
+     * vertices
      */
     public int[] findAdjacencyVertices(int v) {
         int[] vert = new int[verticesNumber];

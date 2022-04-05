@@ -7,10 +7,6 @@ import java.util.Scanner;
 public class Prog15_07 {
     int count;
 
-    public static void main(String[] args) {
-        new Prog15_07();
-    }
-
     public Prog15_07() {
         count = 0;
         Scanner in = new java.util.Scanner(System.in);
@@ -34,6 +30,10 @@ public class Prog15_07 {
                         + count);
         //            }
         //        } while (!s.equals("q"));
+    }
+
+    public static void main(String[] args) {
+        new Prog15_07();
     }
 
     BigInteger randomBigInteger(BigInteger value) {

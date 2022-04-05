@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/** Borrowd from Prog15_08 */
+/**
+ * Borrowd from Prog15_08
+ */
 public class Graph {
 
     private int verticesNumber;
@@ -61,7 +63,7 @@ public class Graph {
     }
 
     public int[] getBounds() {
-        return new int[] {s, t};
+        return new int[]{s, t};
     }
 
     public int[][] getMatrix() {
@@ -73,7 +75,7 @@ public class Graph {
      *
      * @param v given vertex
      * @return list of vertices adjacent to v stored in an array; size of array = number of adjacent
-     *     vertices
+     * vertices
      */
     public int[] findAdjacencyVertices(int v) {
         int[] vert = new int[verticesNumber];
@@ -89,7 +91,7 @@ public class Graph {
         return Arrays.copyOf(vert, total);
     }
 
-    int minDistance(int path_array[], boolean sptSet[], int target)   {
+    int minDistance(int[] path_array, boolean[] sptSet, int target) {
         // Initialize min value
         int min = Integer.MAX_VALUE, min_index = -1;
         for (int v = 0; v < target; v++)
@@ -101,13 +103,13 @@ public class Graph {
         return min_index;
     }
 
-    int[] dijkstra(int src, int target)  {
+    int[] dijkstra(int src, int target) {
 
-        int path_array[] = new int[target]; // The output array. dist[i] will hold
+        int[] path_array = new int[target]; // The output array. dist[i] will hold
         // the shortest distance from src to i
 
         // spt (shortest path set) contains vertices that have shortest path
-        boolean sptSet[] = new boolean[target];
+        boolean[] sptSet = new boolean[target];
 
         // Initially all the distances are INFINITE and stpSet[] is set to false
         for (int i = 0; i < target; i++) {
