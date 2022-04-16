@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Assignment3 {
     int numPoints;
     ArrayList<Point> points;
-
+    static int[] solutionRoute;
     public static void main(String[] args) {
         new Assignment3();
     }
@@ -23,6 +23,7 @@ public class Assignment3 {
         String pathToFile = "src/main/java/Assignment3/points.txt";
         numPoints = getPointsFromFile(points, pathToFile);
 
+        System.out.println("====Distance between points before TSP====");
         for (int i = 0; i < numPoints - 1; i++) {
             System.out.printf("Distance between %d and %d: %d\n", i, i + 1, Point.euclideanDistance(points.get(i), points.get(i + 1)));
             points.get(i).setWeight(Point.euclideanDistance(points.get(i), points.get(i + 1)));
@@ -30,16 +31,28 @@ public class Assignment3 {
         points.get(numPoints - 1).setWeight(Point.euclideanDistance(points.get(0), points.get(numPoints - 1)));
         System.out.printf("Distance between %d and %d: %d\n", numPoints - 1, 0, Point.euclideanDistance(points.get(numPoints - 1), points.get(0)));
 
-        System.out.println("Number of possible connections: " + (numPoints * (numPoints - 1)) / 2);
-        System.out.println("Number of points: " + numPoints);
 
         TSP_localsearch(points);
+
+        System.out.println("====Distance between points after TSP====");
+        //Recalculate weights
+        for (int i = 0; i < points.size() - 1; i++) {
+            System.out.printf("Distance between %d and %d: %d\n", solutionRoute[i], solutionRoute[i+1], Point.euclideanDistance(points.get(solutionRoute[i]), points.get(solutionRoute[i + 1])));
+            points.get(i).setWeight(Point.euclideanDistance(points.get(solutionRoute[i]), points.get(solutionRoute[i + 1])));
+        }
+        points.get(points.size() - 1).setWeight(Point.euclideanDistance(points.get(0), points.get(points.size() - 1)));
+
+        System.out.println("Number of possible connections: " + (numPoints * (numPoints - 1)) / 2);
+        System.out.println("Number of points: " + numPoints);
 
         FrameDisplay frame = new FrameDisplay(points);
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
 
+    public static int[] getSolutionRoute(){
+        return solutionRoute;
+    }
 
     private static int getPointsFromFile(ArrayList<Point> points, String pathToFile) {
         int numPoints;
@@ -62,28 +75,32 @@ public class Assignment3 {
 
     public int TSP_localsearch(ArrayList<Point> shortestRoute) {
         int bestDistance;
+        int[] shortRoute = new int[numPoints];
         int[] a = new int[numPoints];
         for (int i = 0; i < numPoints; i++) {
-            a[i] = shortestRoute.get(i).getWeight();
+            shortRoute[i] = shortestRoute.get(i).getWeight();
         }
+
+        randomPermutation(a);
+        System.arraycopy(a, 0, shortRoute, 0 , numPoints);
         bestDistance = totalDistance(a);
 
         boolean betterSolutionFound;
         do {
             betterSolutionFound = false;
-            PermutationNeighborhood pn = new PermutationNeighborhood(a);
+            PermutationNeighborhood pn = new PermutationNeighborhood(shortRoute);
 
             while (pn.hasNext()) {
                 a = pn.next();
                 int currentDistance = totalDistance(a);
                 if (currentDistance < bestDistance) {
-                    System.arraycopy(a, 0, shortestRoute, 0, numPoints);
+                    System.arraycopy(a, 0, shortRoute, 0, numPoints);
                     bestDistance = currentDistance;
                     betterSolutionFound = true;
                 }
             }
         } while (betterSolutionFound);
-        System.out.println("a:" + Arrays.toString(a));
+        solutionRoute = a;
         return bestDistance;
     }
 

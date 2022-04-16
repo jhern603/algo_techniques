@@ -15,7 +15,7 @@ public class DisplayPlane extends javax.swing.JPanel {
 
 
     public void paint(Graphics g) {
-
+        int[] solution = Assignment3.getSolutionRoute();
         // Dimensions for boundary box of circle
         int diameter = 100;
         // radius of circle
@@ -25,6 +25,7 @@ public class DisplayPlane extends javax.swing.JPanel {
         int labelY = 31;
         int sizePlane = this.points.size();
         coords = new int[sizePlane][2];
+
 
 
         //Draws Vertices with Edges
@@ -44,12 +45,12 @@ public class DisplayPlane extends javax.swing.JPanel {
             int fromY = coords[i - 1][1] + radius / 2;
             int toX = coords[i][0] + radius / 2;
             int toY = coords[i][1] + radius / 2;
-            drawWeight(g, (fromX+toX)/2,(fromY+toY)/2, String.valueOf(points.get(i-1).getWeight()));
+            drawWeight(g, (fromX + toX) / 2, (fromY + toY) / 2, String.valueOf(points.get(i - 1).getWeight()));
         }
-        drawWeight(g, ((coords[sizePlane - 1][0] + radius / 2) + (coords[0][0] + radius / 2))/2 , ((coords[sizePlane - 1][1] + radius / 2)+(coords[0][1] + radius / 2))/2, String.valueOf(points.get(5).getWeight()));
+        drawWeight(g, ((coords[sizePlane - 1][0] + radius / 2) + (coords[0][0] + radius / 2)) / 2, ((coords[sizePlane - 1][1] + radius / 2) + (coords[0][1] + radius / 2)) / 2, String.valueOf(points.get(solution[5]).getWeight()));
 
         for (int i = 0; i < sizePlane; i++) {
-            drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, i, Color.ORANGE);
+            drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, solution[i], Color.ORANGE);
         }
 
 
