@@ -47,7 +47,7 @@ public class DisplayPlane extends javax.swing.JPanel {
             int toY = coords[i][1] + radius / 2;
             drawWeight(g, (fromX + toX) / 2, (fromY + toY) / 2, String.valueOf(points.get(i - 1).getWeight()));
         }
-        drawWeight(g, ((coords[sizePlane - 1][0] + radius / 2) + (coords[0][0] + radius / 2)) / 2, ((coords[sizePlane - 1][1] + radius / 2) + (coords[0][1] + radius / 2)) / 2, String.valueOf(points.get(solution[5]).getWeight()));
+        drawWeight(g, ((coords[sizePlane - 1][0] + radius / 2) + (coords[0][0] + radius / 2)) / 2, ((coords[sizePlane - 1][1] + radius / 2) + (coords[0][1] + radius / 2)) / 2, String.valueOf(points.get(points.size()-1).getWeight()));
 
         for (int i = 0; i < sizePlane; i++) {
             drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, solution[i], Color.ORANGE);

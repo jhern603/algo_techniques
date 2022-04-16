@@ -40,7 +40,10 @@ public class Assignment3 {
             System.out.printf("Distance between %d and %d: %d\n", solutionRoute[i], solutionRoute[i+1], Point.euclideanDistance(points.get(solutionRoute[i]), points.get(solutionRoute[i + 1])));
             points.get(i).setWeight(Point.euclideanDistance(points.get(solutionRoute[i]), points.get(solutionRoute[i + 1])));
         }
-        points.get(points.size() - 1).setWeight(Point.euclideanDistance(points.get(0), points.get(points.size() - 1)));
+        points.get(numPoints - 1).setWeight(Point.euclideanDistance(points.get(solutionRoute[0]), points.get(solutionRoute[numPoints - 1])));
+        System.out.printf("Distance between %d and %d: %d\n", solutionRoute[numPoints-1], solutionRoute[0], points.get(numPoints-1).getWeight());
+
+
 
         System.out.println("Number of possible connections: " + (numPoints * (numPoints - 1)) / 2);
         System.out.println("Number of points: " + numPoints);
