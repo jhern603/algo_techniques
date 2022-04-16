@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -54,6 +55,57 @@ public class Graph implements Prog18_01.GraphInterface {
         }
 
         in.close();
+    }
+
+    public int TSP_localsearch(int[] shortestRoute){
+        int bestDistance;
+        int[] a = new int[verticesNumber];
+        randomPermutation(a);
+
+        System.arraycopy(a, 0, shortestRoute, 0, verticesNumber);
+        bestDistance = totalDistance(shortestRoute);
+
+        boolean betterSolutionFound;
+        do{
+            betterSolutionFound = false;
+            PermutationNeighborhood pn = new PermutationNeighborhood(shortestRoute);
+
+            while(pn.hasNext()){
+                a = pn.next();
+                int currentDistance = totalDistance(a);
+                if(currentDistance < bestDistance){
+                    System.arraycopy(a, 0, shortestRoute, 0, verticesNumber);
+                    bestDistance = currentDistance;
+                    betterSolutionFound = true;
+                }
+            }
+        }while(betterSolutionFound);
+        return bestDistance;
+    }
+
+    int totalDistance(int[] a) {
+        int n = verticesNumber;
+        int totalWeight = 0;
+        for (int i = 0; i < n; i++) {
+            int weight = matrix[a[i]][a[(i + 1) % n]];
+            totalWeight += weight;
+        }
+        return totalWeight;
+    }
+
+    public void randomPermutation(int[] a) {
+        for (int i = 0; i < a.length; i++) {
+            a[i] = i;
+        }
+        Random r = new Random();
+        for (int i = a.length - 1; i > 0; i--) {
+            int randLoc = r.nextInt(i + 1);
+            if (randLoc != i) {
+                int temp = a[i];
+                a[i] = a[randLoc];
+                a[randLoc] = temp;
+            }
+        }
     }
 
     public int getVerticesNumber() {
@@ -181,16 +233,6 @@ public class Graph implements Prog18_01.GraphInterface {
         int[] a = new int[verticesNumber];
         TSP_exhaustiveSearch(shortestRoute, a, 0);
         return totalDistance(shortestRoute);
-    }
-
-    int totalDistance(int[] a) {
-        int n = verticesNumber;
-        int totalWeight = 0;
-        for (int i = 0; i < n; i++) {
-            int weight = matrix[a[i]][a[(i + 1) % n]];
-            totalWeight += weight;
-        }
-        return totalWeight;
     }
 
     private void TSP_exhaustiveSearch(int[] shortestRoute, int[] a, int k) {

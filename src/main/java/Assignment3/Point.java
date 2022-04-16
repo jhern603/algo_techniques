@@ -3,6 +3,7 @@ package Assignment3;
 public class Point {
     private final int x;
     private final int y;
+    private int weight;
 
     public Point() {
         this.x = 0;
@@ -32,7 +33,14 @@ public class Point {
 
     @Override
     public String toString() {
-        return "(" + x + "," + y + ")";
+        return "(" + this.x + "," + this.y + "), weight:" + this.weight;
     }
 
+    public int getWeight() {
+        return this.weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 }

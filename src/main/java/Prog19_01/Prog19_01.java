@@ -16,7 +16,6 @@ public class Prog19_01 {
         new Prog19_01();
     }
 
-
     public void randomPermutation(int[] a) {
         for (int i = 0; i < a.length; i++) {
             a[i] = i;

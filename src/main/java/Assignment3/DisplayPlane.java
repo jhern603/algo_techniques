@@ -29,10 +29,25 @@ public class DisplayPlane extends javax.swing.JPanel {
 
         //Draws Vertices with Edges
         for (int i = 1; i < sizePlane; i++) {
-            coords[i][0] = this.points.get(i).getPoint()[0] + new Random().nextInt(200);
-            coords[i][1] = this.points.get(i).getPoint()[1] + new Random().nextInt(200);
-            drawEdge(g, coords[i - 1][0] + radius / 2, coords[i - 1][1] + radius / 2, coords[i][0] + radius / 2, coords[i][1] + radius / 2, Color.BLACK);
+            coords[i][0] = this.points.get(i).getPoint()[0] + radius + new Random().nextInt(100);
+            coords[i][1] = this.points.get(i).getPoint()[1] + radius + new Random().nextInt(100);
+            int fromX = coords[i - 1][0] + radius / 2;
+            int fromY = coords[i - 1][1] + radius / 2;
+            int toX = coords[i][0] + radius / 2;
+            int toY = coords[i][1] + radius / 2;
+            drawEdge(g, fromX, fromY, toX, toY, Color.BLACK);
         }
+        drawEdge(g, coords[sizePlane - 1][0] + radius / 2, coords[sizePlane - 1][1] + radius / 2, coords[0][0] + radius / 2, coords[0][1] + radius / 2, Color.BLACK);
+
+        for (int i = 1; i < sizePlane; i++) {
+            int fromX = coords[i - 1][0] + radius / 2;
+            int fromY = coords[i - 1][1] + radius / 2;
+            int toX = coords[i][0] + radius / 2;
+            int toY = coords[i][1] + radius / 2;
+            drawWeight(g, (fromX+toX)/2,(fromY+toY)/2, String.valueOf(points.get(i-1).getWeight()));
+        }
+        drawWeight(g, ((coords[sizePlane - 1][0] + radius / 2) + (coords[0][0] + radius / 2))/2 , ((coords[sizePlane - 1][1] + radius / 2)+(coords[0][1] + radius / 2))/2, String.valueOf(points.get(5).getWeight()));
+
         for (int i = 0; i < sizePlane; i++) {
             drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, i, Color.ORANGE);
         }
@@ -61,6 +76,12 @@ public class DisplayPlane extends javax.swing.JPanel {
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
         g.drawString(String.valueOf(i), leftX + labelX, topY + labelY);
+    }
+
+    private void drawWeight(Graphics g, int x, int y, String weight) {
+        g.setColor(Color.BLACK);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));
+        g.drawString(weight, x + 2, y + 2);
     }
 
 }
