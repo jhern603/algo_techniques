@@ -9,6 +9,13 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+/*
+Assignment 3 Done in joint Team Collaboration Between Jose Hernandez and Ziad Malik
+PID: 5712864, 6174850
+This Class is the Tester class to go on and test the Program we have created that will use various search methods to go
+on and find the Optimal Solution to the TSP Problem
+ */
+
 public class Assignment3 {
     int numPoints;
     ArrayList<Point> points;
@@ -31,7 +38,7 @@ public class Assignment3 {
         points.get(numPoints - 1).setWeight(Point.euclideanDistance(points.get(0), points.get(numPoints - 1)));
         System.out.printf("Distance between %d and %d: %d\n", numPoints - 1, 0, Point.euclideanDistance(points.get(numPoints - 1), points.get(0)));
 
-
+        //Travelling Sales Person Local Search
         TSP_localsearch(points);
 
         System.out.println("====Distance between points after TSP====");
@@ -56,7 +63,8 @@ public class Assignment3 {
     public static int[] getSolutionRoute(){
         return solutionRoute;
     }
-
+    
+    //Basic Method to go on ahead and Read from a File Provided for Various Test Cases
     private static int getPointsFromFile(ArrayList<Point> points, String pathToFile) {
         int numPoints;
         File input = new File(pathToFile);
@@ -76,6 +84,8 @@ public class Assignment3 {
         return numPoints;
     }
 
+    //Local Search Done in order to find a Solution. This algorithm searchs within the Locality of its Initial Start point for Better Solutions If No Neighbors are "Better", we return the Solution
+    //Has its Flaws: Could Return Local Minimum not Global Minimum.
     public int TSP_localsearch(ArrayList<Point> shortestRoute) {
         int bestDistance;
         int[] shortRoute = new int[numPoints];
@@ -107,6 +117,7 @@ public class Assignment3 {
         return bestDistance;
     }
 
+    //Total Distance Method
     int totalDistance(int[] a) {
         int n = numPoints - 1;
         int totalWeight = 0;
@@ -116,6 +127,7 @@ public class Assignment3 {
         return totalWeight;
     }
 
+    //Random Permutation Selection from All Permutations Method which we discussed in class.
     public void randomPermutation(int[] a) {
         for (int i = 0; i < a.length; i++) {
             a[i] = i;

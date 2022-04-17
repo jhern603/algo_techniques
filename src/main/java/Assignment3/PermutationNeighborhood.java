@@ -5,12 +5,20 @@ public class PermutationNeighborhood {
     private final int SIZE; //size of permutation
     private int loc1; //loc1 and loc2 are the locations of
     private int loc2; //p that will be swapped next
+    /*
+    Assignment 3 Done in joint Team Collaboration Between Jose Hernandez and Ziad Malik
+    PID: 5712864, 6174850
+    This Class is the Permutation Neighbor Class that handles all the Locality Functionality of the Solution at hand
+    It will move forward and look to its neighbors for better solutions. If a Better one is found it will move onto that
+    solution and continue
+    */
     /**
      * Initializes permutation of this object and locations
      * whose values will be swapped.
      *
      * @param a permutation whose neighborhood is to be generated
      */
+     
     public PermutationNeighborhood(int[] a)
     {
         SIZE = a.length;

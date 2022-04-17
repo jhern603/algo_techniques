@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+/*
+Assignment 3 Done in joint Team Collaboration Between Jose Hernandez and Ziad Malik
+PID: 5712864, 6174850
+This Class is for the Displaying of the window that will Visualize our Graphs for us. 
+The Graph is passed into this Class where it is then painted and displayed for the user.
+ */
 public class DisplayPlane extends javax.swing.JPanel {
 
     ArrayList<Point> points;
@@ -37,6 +43,8 @@ public class DisplayPlane extends javax.swing.JPanel {
             int toY = coords[i][1] + radius / 2;
             drawEdge(g, fromX, fromY, toX, toY, Color.BLACK);
         }
+
+        //Draw Edge Method Call
         drawEdge(g, coords[sizePlane - 1][0] + radius / 2, coords[sizePlane - 1][1] + radius / 2, coords[0][0] + radius / 2, coords[0][1] + radius / 2, Color.BLACK);
 
         for (int i = 1; i < sizePlane; i++) {
@@ -74,7 +82,8 @@ public class DisplayPlane extends javax.swing.JPanel {
 
     }
 
-
+    //Drawing Edge Void Method Class that takes parameters of points in.
+    //Followed by other methods that are used to help the visulaization of the Graph
     private void drawEdge(Graphics g, int x1, int y1, int x2, int y2, Color color) {
         g.setColor(color);
         g.drawLine(x1, y1, x2, y2);
