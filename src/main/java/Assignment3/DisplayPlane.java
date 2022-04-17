@@ -2,6 +2,7 @@ package Assignment3;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class DisplayPlane extends javax.swing.JPanel {
@@ -12,7 +13,6 @@ public class DisplayPlane extends javax.swing.JPanel {
     public DisplayPlane(ArrayList<Point> points) {
         this.points = points;
     }
-
 
     public void paint(Graphics g) {
         int[] solution = Assignment3.getSolutionRoute();
@@ -27,11 +27,10 @@ public class DisplayPlane extends javax.swing.JPanel {
         coords = new int[sizePlane][2];
 
 
-
         //Draws Vertices with Edges
         for (int i = 1; i < sizePlane; i++) {
-            coords[i][0] = this.points.get(i).getPoint()[0] + radius + new Random().nextInt(100);
-            coords[i][1] = this.points.get(i).getPoint()[1] + radius + new Random().nextInt(100);
+            coords[i][0] = this.points.get(i).getPoint()[0] + radius + new Random().nextInt(100) + 100;
+            coords[i][1] = this.points.get(i).getPoint()[1] + radius + new Random().nextInt(100) + 100;
             int fromX = coords[i - 1][0] + radius / 2;
             int fromY = coords[i - 1][1] + radius / 2;
             int toX = coords[i][0] + radius / 2;
@@ -47,12 +46,31 @@ public class DisplayPlane extends javax.swing.JPanel {
             int toY = coords[i][1] + radius / 2;
             drawWeight(g, (fromX + toX) / 2, (fromY + toY) / 2, String.valueOf(points.get(i - 1).getWeight()));
         }
-        drawWeight(g, ((coords[sizePlane - 1][0] + radius / 2) + (coords[0][0] + radius / 2)) / 2, ((coords[sizePlane - 1][1] + radius / 2) + (coords[0][1] + radius / 2)) / 2, String.valueOf(points.get(points.size()-1).getWeight()));
+        drawWeight(g, ((coords[sizePlane - 1][0] + radius / 2) + (coords[0][0] + radius / 2)) / 2, ((coords[sizePlane - 1][1] + radius / 2) + (coords[0][1] + radius / 2)) / 2, String.valueOf(points.get(points.size() - 1).getWeight()));
 
         for (int i = 0; i < sizePlane; i++) {
             drawVertex(g, coords[i][0], coords[i][1], radius, radius, labelX, labelY, solution[i], Color.ORANGE);
         }
 
+        int n = 0;
+        for (int i = 1; i < points.size(); i++) {
+            n += Point.euclideanDistance(points.get(solution[i - 1]), points.get(solution[i]));
+        }
+        String output = "The cost for the shortest path is " + n;
+        String path = "Shortest path: " + Arrays.toString(solution);
+        String timeToSolution;
+        if ((Assignment3.endTime - Assignment3.startTime) >= 1000000000) {
+            timeToSolution = "Time to solution: " + (Assignment3.endTime - Assignment3.startTime) / 1000000000 + "s";
+        } else if ((Assignment3.endTime - Assignment3.startTime) >= 1000000) {
+            timeToSolution = "Time to solution: " + (Assignment3.endTime - Assignment3.startTime) / 1000000 + "ms";
+        } else {
+            timeToSolution = "Time to solution: " + (Assignment3.endTime - Assignment3.startTime) + "ns";
+        }
+        g.setColor(Color.BLACK);
+        g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+        g.drawString(output, 50, 50);
+        g.drawString(path, 50, 75);
+        g.drawString(timeToSolution, 50, 100);
 
     }
 
