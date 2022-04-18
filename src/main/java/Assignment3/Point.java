@@ -1,16 +1,18 @@
 package Assignment3;
-/*
-Assignment 3 Done in joint Team Collaboration Between Jose Hernandez and Ziad Malik
-PID: 5712864, 6174850
-This Class is The Class for Our Points. each Point can have its Distance found from another Point Using
-Euclidean Distance. Along with this, each Point has a Weight which will play a part in finding the Best and
-most Optimal Solution to our TSP Problem.
+
+/**
+ @author Jose Hernandez, PID 5712864
+ @author Ziad Malik, PID 6174850
+ Object class that represents a point on a 2D plane that holds a weight distance between the current point, and the next point
  */
 public class Point {
     private final int x;
     private final int y;
     private int weight;
 
+    /**
+     * Default constructor: if no parameters, throw an error and exit the program
+     */
     public Point() {
         this.x = 0;
         this.y = 0;
@@ -18,23 +20,37 @@ public class Point {
         System.exit(1);
     }
 
+    /**
+     * Constructor that accepts an (x, y) coordinate
+     * @param x coordinate
+     * @param y coordinate
+     */
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Getter method for a coordinate pair
+     * @return array of [x, y] coordinate
+     */
     public int[] getPoint() {
         return new int[]{this.x, this.y};
     }
 
-    //Euclidean Distance Method to Find Distance Between Two Points using Geometry.
+    /**
+     * Find the geometric difference between two points using the Euclidean Distance formula
+     * @param from inital Point Object
+     * @param to final Point Object
+     * @return Distance between From and To points
+     */
     public static int euclideanDistance(Point from, Point to) {
         int differenceX = (int) Math.pow(from.x - to.x, 2);
         int differenceY = (int) Math.pow(from.y - to.y, 2);
         return (int) Math.sqrt(differenceX + differenceY);
     }
 
-    //Weight Setters and Getters.
+
     public int getWeight() {
         return this.weight;
     }

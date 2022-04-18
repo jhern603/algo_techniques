@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-/*
-Assignment 3 Done in joint Team Collaboration Between Jose Hernandez and Ziad Malik
-PID: 5712864, 6174850
-This Class is for the Displaying of the window that will Visualize our Graphs for us. 
-The Graph is passed into this Class where it is then painted and displayed for the user.
+/**
+ * @author Jose Hernandez, PID 5712864
+ * @author Ziad Malik, PID 6174850
+ * This Class is for the Displaying of the window that will Visualize our Graphs for us.
+ * The Graph is passed into this Class where it is then painted and displayed for the user.
  */
 public class DisplayPlane extends javax.swing.JPanel {
 
@@ -35,8 +35,8 @@ public class DisplayPlane extends javax.swing.JPanel {
 
         //Draws Vertices with Edges
         for (int i = 1; i < sizePlane; i++) {
-            coords[i][0] = this.points.get(i).getPoint()[0] + radius + new Random().nextInt(100) + 100;
-            coords[i][1] = this.points.get(i).getPoint()[1] + radius + new Random().nextInt(100) + 100;
+            coords[i][0] = this.points.get(i).getPoint()[0] + radius + new Random().nextInt(500);
+            coords[i][1] = this.points.get(i).getPoint()[1] + radius + new Random().nextInt(500);
             int fromX = coords[i - 1][0] + radius / 2;
             int fromY = coords[i - 1][1] + radius / 2;
             int toX = coords[i][0] + radius / 2;
@@ -82,13 +82,34 @@ public class DisplayPlane extends javax.swing.JPanel {
 
     }
 
-    //Drawing Edge Void Method Class that takes parameters of points in.
-    //Followed by other methods that are used to help the visulaization of the Graph
+    /**
+     * Draws an edge between two vertices
+     *
+     * @param g     Graphics object
+     * @param x1    X-coordinate of the first vertex
+     * @param y1    Y-coordinate of the first vertex
+     * @param x2    X-coordinate of the second vertex
+     * @param y2    Y-coordinate of the second vertex
+     * @param color Color for the edge
+     */
     private void drawEdge(Graphics g, int x1, int y1, int x2, int y2, Color color) {
         g.setColor(color);
         g.drawLine(x1, y1, x2, y2);
     }
 
+    /**
+     * Draws a vertex
+     *
+     * @param g      Graphics object
+     * @param leftX  Upper left x position of vertex
+     * @param topY   Upper left y position of vertex
+     * @param width  Width of the bounding box for the vertex
+     * @param height Height of the bounding box for the vertex
+     * @param labelX X-Coordinate for the label of the vertex
+     * @param labelY Y-Coordinate for the label of the vertex
+     * @param i      The sequential number for the label of the vertex
+     * @param color  Color of the vertex
+     */
     private void drawVertex(
             Graphics g,
             int leftX,
@@ -106,6 +127,14 @@ public class DisplayPlane extends javax.swing.JPanel {
         g.drawString(String.valueOf(i), leftX + labelX, topY + labelY);
     }
 
+    /**
+     * Draws the weight of an edge on the plane
+     *
+     * @param g      Graphics object
+     * @param x      X-Coordinate of the weight label
+     * @param y      Y-Coordinate of the weight label
+     * @param weight The weight to be drawn
+     */
     private void drawWeight(Graphics g, int x, int y, String weight) {
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 24));

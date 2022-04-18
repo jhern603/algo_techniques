@@ -2,12 +2,12 @@ package Assignment3;
 
 import java.util.ArrayList;
 
-/*
-Assignment 3 Done in joint Team Collaboration Between Jose Hernandez and Ziad Malik
-PID: 5712864, 6174850
-This Class is the Frame Display Class that Creates the Panel onto which we display the Graph
- */
 
+/**
+ * @author Jose Hernandez, PID 5712864
+ * @author Ziad Malik, PID 6174850
+ * This Class is the Frame Display Class that Creates the Panel onto which we display the Graph
+ */
 public class FrameDisplay extends javax.swing.JFrame {
     int WIDTH = 864;
     int HEIGHT = 864;
